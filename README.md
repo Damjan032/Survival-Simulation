@@ -5,12 +5,12 @@ Predmetni projekat iz naprednih tehnika programiranja
 Survival Simulation prestavlja aplikaciju koja simulira preživljavanje populacije jedinki. Da bi jedinka peživela mora doći do hrane i eventualno se reprodukovala. 
 
 ## Članovi populacije
-Članovi same populacije su inicijalno podeljeni u dva tipa, u 'dobre' i 'loše'. Dobre jedinke ako se na istom izvoru resursa nađu sa drugom jedinkom, dele hranu. Nasuprot dobrim, loši ako se susretnu sa drugom jedinkom, kradu od druge, čime joj smanjuju šansu za daljim preživljavanjem. 
+Članovi same populacije su inicijalno podeljeni u dva tipa, u 'dobre' i 'loše'. Dobra jedinka ako se na istom izvoru resursa nađe sa drugom jedinkom, dele hranu. Nasuprot dobrim, loši ako se susretnu sa drugom jedinkom, kradu od druge, čime joj smanjuju šansu za daljim preživljavanjem. 
 
 ## Pravila preživljavanja
 
-Preživljavanje se odvija u iteracijama, koje su podeljene da dan i noć. Jedinke preko dana tragaju za hranom, dok se noću potencijalno reprodukuju ili umiru, ako nemaju dovoljno hrane.
-Prilikom reprodukovanja moguće je da dođe do mutacija (promena tipa u odnosu na roditelja). Takođe, postoje grabljivice koje mogu da usmrte jedinku dok je u potrzi za hranom, sama hrana može biti ortovna.
+Preživljavanje se odvija u iteracijama, koje su podeljene na dan i noć. Jedinke preko dana tragaju za hranom, dok se noću potencijalno reprodukuju ili umiru, ako nemaju dovoljno hrane.
+Prilikom reprodukovanja moguće je da dođe do mutacija (promena tipa u odnosu na roditelja). Takođe, postoje grabljivice koje mogu da usmrte jedinku dok je u potrzi za hranom, sama hrana može biti otrovna.
 
 U zavisnosti od količine hrane zavisi da li će jedinka preživeti, ali ako nema dovoljno hrane za sigurnu noć (šansa da preživi = 100%) njena šansa za reprodukcijom je 0. A svaki višak hrane povećava šansu sa povećavanjem populacije.
 
@@ -26,21 +26,21 @@ Sistem bi se sastojao iz dva dela: logičkog dela koji je implementiran uz pomoc
 
 Logička jedinica bi se sastojala od jednog Go procesa, smatram da bi u ovakvom načinu implementacije nema potrebe sa mikoserviskom arhitekturom.
 
-Glavni zadaci bi joj bili nasimično raspoređivala jedinke i obavljala proces ishrane, preko dana, dok bi noču na osnovu pravila i šansi obrađivala podatke i donosila zaključke o samoj jedinki.
+Glavni zadaci logičke jedinice u toku dana su raspoređivanje samih jedinki i ishrana, dok bi noću na osnovu pravila i šansi obrađivala podatke i donosila zaključke o samoj jedinki.
 
 ### Korisnicki interfejs (Pharo)
 
-Korisnički interfejs bi se realizovao u pomoc Roassal biblioteke koja kao osnovu koristi Pharo.
+Korisnički interfejs bi se realizovao uz pomoć Roassal biblioteke koja kao osnovu koristi Pharo.
 
-Sastojao bi se iz dela za unos pareamtra i dela za vizuelizaciju i kontrolu iteracija.
+Sastojao bi se iz dela za unos parametara i dela za vizuelizaciju i kontrolu iteracija.
 
-Vizuelizacija bi bila u 2D tehnologiji koja bi prikazivala promenu populacije u realnom vremenu.
+Vizuelizacija bi bila u 2D tehnologiji i prikazivala bi promenu populacije u realnom vremenu.
 
 ## Dalja unapređenja
 
 Neka od potencijalnih porširenja mogu biti:
 - Paralelizacija logičke jedinice zasnovana na modelu deljene memorije (gouroutine)
-- Upotreba logova koje bi omogućili retrospektivnu analizu podataka
+- Upotreba logova koji bi omogućili retrospektivnu analizu podataka
 - Proširenje same složenosti pravila
 - Povećavanje broja tipova jedinki
 
