@@ -5,7 +5,7 @@ Predmetni projekat iz naprednih tehnika programiranja
 Survival Simulation prestavlja aplikaciju koja simulira preživljavanje populacije jedinki. Da bi jedinka peživela mora doći do hrane i eventualno se reprodukovala. 
 
 ## Članovi populacije
-Članovi same populacije su inicijalno podeljeni u dva tipa, u 'dobre' i 'loše'. Dobra jedinka ako se na istom izvoru resursa nađe sa drugom jedinkom, dele hranu. Nasuprot dobrim, loši ako se susretnu sa drugom jedinkom, kradu od druge, čime joj smanjuju šansu za daljim preživljavanjem. 
+Članovi same populacije su inicijalno podeljeni na dva tipa, na 'dobre' i 'loše'. Dobra jedinka ako se na istom izvoru resursa nađe sa drugom jedinkom, dele hranu. Nasuprot dobrim, loši ako se susretnu sa drugom jedinkom, kradu od druge, čime joj smanjuju šansu za daljim preživljavanjem. 
 
 ## Pravila preživljavanja
 
