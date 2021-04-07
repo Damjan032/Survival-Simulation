@@ -35,8 +35,7 @@ func main() {
 	//fmt.Printf("\n Niz: %v \n", niz)
 	//niz = append(niz[:0], niz[1:]...)
 	//fmt.Printf("%v", niz)
-	var population []*Individual
-	population = initPopulation(25, 5)
+	var population = NewPopulation(1, 5)
 
 	/*for _, animal := range population {
 		fmt.Println("My animal is:", animal)
@@ -45,27 +44,40 @@ func main() {
 	fmt.Println("des")
 	fmt.Println(rand.Intn(100))*/
 
-	var foodSources = initFoodSources(16)
-
-	merge(population, foodSources)
-	for _, foodSource := range foodSources {
-		fmt.Println("Size:", len(foodSource.resources))
-		fmt.Println("Occupied", foodSource.occupied)
-		if foodSource.occupied == 1 {
-			foodSource.occupiedBy[0].health = 1000
-			fmt.Println("TO BREEEEEEEEEEEE")
-		}
-		if foodSource.occupied == 0 {
-			//foodSource.occupiedBy[0].health=1000
-			fmt.Println("TO BREEEEEEEEEEEE")
-		}
-		for _, foodUnit := range foodSource.resources {
-			fmt.Println("Quantity", foodUnit.quantity, ", type", foodUnit.foodType)
-		}
+	var foodSources = initFoodSources(10)
+	for i := 0; i < 100; i++ {
+		day(population.members, foodSources)
+		//printPlebs(population.members)
+		night(population, 10, 10)
+		fmt.Println("BAD", population.numberOfBad, " GOOD", population.numberOfGood)
+		fmt.Println("SUM ", population.numberOfBad+population.numberOfGood)
 	}
 
-	for _, animal := range population {
+	//printPlebs(population.members)
+	//day(population.members, foodSources)
+	//night(population, 10,10)
+	//fmt.Println(population.numberOfBad, " ", population.numberOfGood)
+	//for _, foodSource := range foodSources {
+	//	fmt.Println("Size:", len(foodSource.resources))
+	//	fmt.Println("Occupied", foodSource.occupied)
+	//	/*if len(foodSource.occupiedBy) != 0 {
+	//		//foodSource.occupiedBy[0].health = 1000
+	//		fmt.Println("TO BREEEEEEEEEEEE")
+	//	}
+	//	if foodSource.occupied != 0 {
+	//		//foodSource.occupiedBy[0].health=1000
+	//		fmt.Println("TO BREEEEEEEEEEEE")
+	//	}*/
+	//	//for _, foodUnit := range foodSource.resources {
+	//	//	fmt.Println("Quantity", foodUnit.quantity, ", type", foodUnit.foodType)
+	//	//}
+	//}
+
+	//printPlebs(population.members)
+}
+
+func printPlebs(plebs []*Individual) {
+	for _, animal := range plebs {
 		fmt.Println("Pleb food:", animal.health)
-		fmt.Println("Pleb food:", len(animal.resources))
 	}
 }
