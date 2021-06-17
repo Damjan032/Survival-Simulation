@@ -1,4 +1,4 @@
-package main
+package models
 
 type Population2 struct {
 	NumberOfBad  int `json:"number-of-bad"`
@@ -23,5 +23,16 @@ func NewPopulation(numberOfBad int, numberOfGood int) *Population {
 	population.Members = initMembersOfPopulation(numberOfGood, numberOfBad)
 	population.NumberOfBad = numberOfBad
 	population.NumberOfGood = numberOfGood
+	return population
+}
+
+func initMembersOfPopulation(numberOfGood int, numberOfBad int) []*Individual {
+	var population []*Individual
+	for i := 0; i < numberOfGood; i++ {
+		population = append(population, NewIndividual(GOOD))
+	}
+	for i := 0; i < numberOfBad; i++ {
+		population = append(population, NewIndividual(BAD))
+	}
 	return population
 }

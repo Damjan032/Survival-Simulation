@@ -1,4 +1,4 @@
-package main
+package models
 
 type FoodType int
 
@@ -12,7 +12,7 @@ type Food struct {
 	Quantity int      `json:"quantity"`
 }
 
-func newFood(foodType FoodType, quantity int) *Food {
+func NewFood(foodType FoodType, quantity int) *Food {
 	food := new(Food)
 	food.FoodType = foodType
 	food.Quantity = quantity
@@ -20,7 +20,7 @@ func newFood(foodType FoodType, quantity int) *Food {
 }
 
 type FoodSource struct {
-	resources  []*Food
-	occupiedBy []*Individual
-	occupied   int
+	Resources  []*Food
+	OccupiedBy []*Individual
+	Occupied   int
 }

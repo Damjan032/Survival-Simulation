@@ -1,13 +1,15 @@
-package main
+package services
 
 import (
+	"../models"
+	"../utils"
 	"fmt"
 	"math/rand"
 )
 
-func merge(population []*Individual, foodSources []*FoodSource) {
-	var populationFreeArray = makeArray(len(population))   //Lista id-ova
-	var foodSourcesFreeArray = makeArray(len(foodSources)) //Lista id-ova
+func Merge(population []*models.Individual, foodSources []*models.FoodSource) {
+	var populationFreeArray = utils.MakeArray(len(population))   //Lista id-ova
+	var foodSourcesFreeArray = utils.MakeArray(len(foodSources)) //Lista id-ova
 	//fmt.Printf("%v\n", populationFreeArray)
 	//fmt.Printf("%v\n", foodSourcesFreeArray)
 	// prolazim kroz listu dok svi ne nadju izvoe za hranu ili dok se ne popune svi izvori hrane
@@ -21,23 +23,23 @@ func merge(population []*Individual, foodSources []*FoodSource) {
 		var individualRandomId = rand.Intn(len(populationFreeArray))
 		var plebId = populationFreeArray[individualRandomId]
 		var pleb = population[plebId]
-		if foodSources[foodSourceId].occupied == 0 {
-			foodSources[foodSourceId].occupiedBy = append(foodSources[foodSourceId].occupiedBy, pleb)
+		if foodSources[foodSourceId].Occupied == 0 {
+			foodSources[foodSourceId].OccupiedBy = append(foodSources[foodSourceId].OccupiedBy, pleb)
 			//pleb.resources = append(pleb.resources, foodSources[foodSourceId].resources[0])
-			foodSources[foodSourceId].occupied++
+			foodSources[foodSourceId].Occupied++
 		} else {
-			foodSources[foodSourceId].occupiedBy = append(foodSources[foodSourceId].occupiedBy, pleb)
+			foodSources[foodSourceId].OccupiedBy = append(foodSources[foodSourceId].OccupiedBy, pleb)
 			//pleb.resources = append(pleb.resources, foodSources[foodSourceId].resources[1])
-			foodSources[foodSourceId].occupied++
+			foodSources[foodSourceId].Occupied++
 			foodSourcesFreeArray = append(foodSourcesFreeArray[:foodRandomId], foodSourcesFreeArray[foodRandomId+1:]...)
 		}
 		populationFreeArray = append(populationFreeArray[:individualRandomId], populationFreeArray[individualRandomId+1:]...)
 	}
 }
 
-func merge2(population []*Individual, foodSources []*FoodSource) {
-	var populationFreeArray = makeArray(len(population))   //Lista id-ova
-	var foodSourcesFreeArray = makeArray(len(foodSources)) //Lista id-ova
+func merge2(population []*models.Individual, foodSources []*models.FoodSource) {
+	var populationFreeArray = utils.MakeArray(len(population))   //Lista id-ova
+	var foodSourcesFreeArray = utils.MakeArray(len(foodSources)) //Lista id-ova
 	fmt.Printf("%v\n", populationFreeArray)
 	fmt.Printf("%v\n", foodSourcesFreeArray)
 	for _, pleb := range population {
@@ -49,12 +51,12 @@ func merge2(population []*Individual, foodSources []*FoodSource) {
 		var randomFoodId = rand.Intn(len(foodSourcesFreeArray))
 		var foodSourceId = foodSourcesFreeArray[randomFoodId]
 		fmt.Println(foodSourceId)
-		if foodSources[foodSourceId].occupied == 0 {
-			pleb.Resources = append(pleb.Resources, foodSources[foodSourceId].resources[0])
-			foodSources[foodSourceId].occupied++
+		if foodSources[foodSourceId].Occupied == 0 {
+			pleb.Resources = append(pleb.Resources, foodSources[foodSourceId].Resources[0])
+			foodSources[foodSourceId].Occupied++
 		} else {
-			pleb.Resources = append(pleb.Resources, foodSources[foodSourceId].resources[1])
-			foodSources[foodSourceId].occupied++
+			pleb.Resources = append(pleb.Resources, foodSources[foodSourceId].Resources[1])
+			foodSources[foodSourceId].Occupied++
 			fmt.Println("UDJES LI ODJE")
 			fmt.Println("ID:", foodSourceId)
 			fmt.Println(len(foodSourcesFreeArray))

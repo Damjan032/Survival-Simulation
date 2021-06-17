@@ -1,6 +1,8 @@
 package main
 
 import (
+	"./models"
+	"./services"
 	"fmt"
 	"math/rand"
 	"time"
@@ -14,8 +16,8 @@ func makeArray(len int) []int {
 	return newArray
 }
 
-func isFreeFoodSource(source *FoodSource) bool {
-	return source.occupied < 2
+func isFreeFoodSource(source *models.FoodSource) bool {
+	return source.Occupied < 2
 }
 
 func randomArray(len int) []int {
@@ -30,7 +32,7 @@ func simulation() {
 	fmt.Println("SIMULATION")
 	rand.Seed(time.Now().UnixNano())
 
-	var population = NewPopulation(1, 5)
+	var population = models.NewPopulation(1, 5)
 
 	/*for _, animal := range population {
 		fmt.Println("My animal is:", animal)
@@ -39,12 +41,12 @@ func simulation() {
 	fmt.Println("des")
 	fmt.Println(rand.Intn(100))*/
 
-	var foodSources = initFoodSources(1000)
+	var foodSources = services.InitFoodSources(1000)
 	for i := 0; i < 1000; i++ {
 		fmt.Println("I: ", i)
-		day(population.Members, foodSources)
+		services.Day(population.Members, foodSources)
 		//printPlebs(population.members)
-		night(population, 10, 10)
+		services.Night(population, 10, 10)
 		fmt.Println("BAD", population.NumberOfBad, " GOOD", population.NumberOfGood)
 		fmt.Println("SUM ", population.NumberOfBad+population.NumberOfGood)
 	}
@@ -125,7 +127,7 @@ func main() {
 	fmt.Println("Pleb food:", population)*/
 }
 
-func printPlebs(plebs []*Individual) {
+func printPlebs(plebs []*models.Individual) {
 	for _, animal := range plebs {
 		fmt.Println("Pleb food:", animal.Health)
 	}

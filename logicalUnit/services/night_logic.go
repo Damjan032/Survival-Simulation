@@ -1,6 +1,7 @@
-package main
+package services
 
 import (
+	"../models"
 	"math/rand"
 	"sort"
 )
@@ -9,25 +10,25 @@ const BoostToSurvive = 10
 const MutationPercent = 10
 const MaxHP = 100
 
-func night(population *Population, percentToSurvive int, percentToReproduction int) {
+func Night(population *models.Population, percentToSurvive int, percentToReproduction int) {
 	nightEating(population.Members, percentToSurvive, percentToReproduction)
 	doOrDie(population)
 
 }
 
-func nightEating(population []*Individual, percentToSurvive int, percentToReproduction int) {
+func nightEating(population []*models.Individual, percentToSurvive int, percentToReproduction int) {
 	for _, pleb := range population {
 		pleb.NightRes = nightTimeLogic(pleb)
 	}
 }
 
-func doOrDie(population *Population) {
+func doOrDie(population *models.Population) {
 	var blackList []int //to kill
 	var whiteList []int //to make a child
 	for i := 0; i < len(population.Members); i++ {
-		if population.Members[i].NightRes == DIED {
+		if population.Members[i].NightRes == models.DIED {
 			blackList = append(blackList, i)
-		} else if population.Members[i].NightRes == REPRODUCED {
+		} else if population.Members[i].NightRes == models.REPRODUCED {
 			whiteList = append(whiteList, i)
 		}
 	}
@@ -36,11 +37,11 @@ func doOrDie(population *Population) {
 
 }
 
-func killMembers(population *Population, blackLis []int) {
+func killMembers(population *models.Population, blackLis []int) {
 	sort.Ints(blackLis)
 	for i := 0; i < len(blackLis); i++ {
 		// -i jer je vec obrisalo i onda neki 5. element kad je obrisan neko pre
-		if population.Members[blackLis[i]-i].TypeOfIndividual == GOOD {
+		if population.Members[blackLis[i]-i].TypeOfIndividual == models.GOOD {
 			population.NumberOfGood--
 		} else {
 			population.NumberOfBad--
@@ -50,14 +51,14 @@ func killMembers(population *Population, blackLis []int) {
 	}
 }
 
-func reproduceMember(population *Population, whiteList []int) []*Individual {
-	var newMembers []*Individual
+func reproduceMember(population *models.Population, whiteList []int) []*models.Individual {
+	var newMembers []*models.Individual
 	for i := 0; i < len(whiteList); i++ {
-		var newMember = NewIndividual(population.Members[whiteList[i]].TypeOfIndividual)
+		var newMember = models.NewIndividual(population.Members[whiteList[i]].TypeOfIndividual)
 		if calculateIsHappened(MutationPercent) {
-			convertType(newMember)
+			convertIndividualType(newMember)
 		}
-		if newMember.TypeOfIndividual == GOOD {
+		if newMember.TypeOfIndividual == models.GOOD {
 			population.NumberOfGood++
 		} else {
 			population.NumberOfBad++
@@ -68,22 +69,22 @@ func reproduceMember(population *Population, whiteList []int) []*Individual {
 	return newMembers
 }
 
-func nightTimeLogic(individual *Individual) ProductOfTheNight {
+func nightTimeLogic(individual *models.Individual) models.ProductOfTheNight {
 	if individual.Health <= 0 {
-		return DIED
+		return models.DIED
 	}
 	if individual.Health < MaxHP {
 		if calculateIsHappened(MaxHP - individual.Health + BoostToSurvive) {
-			return DIED
+			return models.DIED
 		}
 	} else if individual.Health >= MaxHP {
 		if calculateIsHappened(individual.Health - MaxHP + BoostToSurvive) {
 			//fmt.Println("UMNOZIO SE")
-			return REPRODUCED
+			return models.REPRODUCED
 		}
 
 	}
-	return NEUTRAL
+	return models.NEUTRAL
 
 }
 

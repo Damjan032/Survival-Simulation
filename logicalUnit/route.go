@@ -1,6 +1,7 @@
 package main
 
 import (
+	"./models"
 	"encoding/json"
 	_ "encoding/json"
 	"fmt"
@@ -15,7 +16,7 @@ var router *mux.Router = nil
 var r = gin.Default()
 
 func GetHelloWorld(c *gin.Context) {
-	var population = NewPopulation(1, 5)
+	var population = models.NewPopulation(1, 5)
 	fmt.Println(json.Marshal(population))
 	btResult, _ := json.Marshal(population)
 	c.Data(http.StatusOK, "application/json", btResult)
@@ -23,7 +24,7 @@ func GetHelloWorld(c *gin.Context) {
 
 }
 func PutElements(c *gin.Context) {
-	var population = NewPopulation(1, 5)
+	var population = models.NewPopulation(1, 5)
 
 	var p = c.PostForm("search-field")
 	fmt.Println(p)
