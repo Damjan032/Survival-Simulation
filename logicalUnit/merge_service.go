@@ -50,10 +50,10 @@ func merge2(population []*Individual, foodSources []*FoodSource) {
 		var foodSourceId = foodSourcesFreeArray[randomFoodId]
 		fmt.Println(foodSourceId)
 		if foodSources[foodSourceId].occupied == 0 {
-			pleb.resources = append(pleb.resources, foodSources[foodSourceId].resources[0])
+			pleb.Resources = append(pleb.Resources, foodSources[foodSourceId].resources[0])
 			foodSources[foodSourceId].occupied++
 		} else {
-			pleb.resources = append(pleb.resources, foodSources[foodSourceId].resources[1])
+			pleb.Resources = append(pleb.Resources, foodSources[foodSourceId].resources[1])
 			foodSources[foodSourceId].occupied++
 			fmt.Println("UDJES LI ODJE")
 			fmt.Println("ID:", foodSourceId)

@@ -16,16 +16,16 @@ const (
 )
 
 type Individual struct {
-	resources        []*Food
-	typeOfIndividual UnitType
-	health           int
-	nightRes         ProductOfTheNight
+	Resources        []*Food           `json:"resources"`
+	TypeOfIndividual UnitType          `json:"type-of-individual"`
+	Health           int               `json:"health"`
+	NightRes         ProductOfTheNight `json:"night-res"`
 }
 
 func NewIndividual(typeOf UnitType) *Individual {
 	i := new(Individual)
-	i.health = 100
-	i.typeOfIndividual = typeOf
-	i.nightRes = NEUTRAL
+	i.Health = 100
+	i.TypeOfIndividual = typeOf
+	i.NightRes = NEUTRAL
 	return i
 }

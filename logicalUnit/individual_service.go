@@ -1,7 +1,7 @@
 package main
 
 func addFood(individual *Individual, foodType FoodType, quantity int) {
-	individual.resources = append(individual.resources, newFood(foodType, quantity))
+	individual.Resources = append(individual.Resources, newFood(foodType, quantity))
 }
 
 func initMembersOfPopulation(numberOfGood int, numberOfBad int) []*Individual {
@@ -16,9 +16,9 @@ func initMembersOfPopulation(numberOfGood int, numberOfBad int) []*Individual {
 }
 
 func convertType(individual *Individual) {
-	if individual.typeOfIndividual == GOOD {
-		individual.typeOfIndividual = BAD
+	if individual.TypeOfIndividual == GOOD {
+		individual.TypeOfIndividual = BAD
 	} else {
-		individual.typeOfIndividual = GOOD
+		individual.TypeOfIndividual = GOOD
 	}
 }
