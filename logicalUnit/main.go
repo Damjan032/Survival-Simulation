@@ -1,6 +1,8 @@
 package main
 
 import (
+	"./controllers"
+	"./globals"
 	"./models"
 	"./services"
 	"fmt"
@@ -31,8 +33,8 @@ func randomArray(len int) []int {
 func simulation() {
 	fmt.Println("SIMULATION")
 	rand.Seed(time.Now().UnixNano())
-
-	var population = models.NewPopulation(1, 5)
+	controllers.SetInitData(nil)
+	var population = globals.Population
 
 	/*for _, animal := range population {
 		fmt.Println("My animal is:", animal)
@@ -41,7 +43,7 @@ func simulation() {
 	fmt.Println("des")
 	fmt.Println(rand.Intn(100))*/
 
-	var foodSources = services.InitFoodSources(1000)
+	var foodSources = globals.FoodSources
 	for i := 0; i < 1000; i++ {
 		fmt.Println("I: ", i)
 		services.Day(population.Members, foodSources)
@@ -116,7 +118,7 @@ func main() {
 	//	//	fmt.Println("Quantity", foodUnit.quantity, ", type", foodUnit.foodType)
 	//	//}
 	//}
-	simulation()
+	//simulation()
 	//printPlebs(population.members)
 	initRouter()
 	/*var population = NewPopulation(1, 5)

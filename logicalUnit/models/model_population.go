@@ -11,13 +11,6 @@ type Population struct {
 	NumberOfGood int           `json:"numberOfGood"`
 }
 
-func NewPopulation2(numberOfBad int, numberOfGood int) *Population2 {
-	population := new(Population2)
-	population.NumberOfBad = numberOfBad
-	population.NumberOfGood = numberOfGood
-	return population
-}
-
 func NewPopulation(numberOfBad int, numberOfGood int) *Population {
 	population := new(Population)
 	population.Members = initMembersOfPopulation(numberOfGood, numberOfBad)

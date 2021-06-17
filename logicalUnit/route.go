@@ -1,6 +1,7 @@
 package main
 
 import (
+	"./controllers"
 	"./models"
 	"encoding/json"
 	_ "encoding/json"
@@ -35,7 +36,10 @@ func PutElements(c *gin.Context) {
 }
 func initRouter() {
 	r.GET("/", GetHelloWorld)
+	r.GET("/toTheEnd", controllers.ToTheEnd)
 	r.POST("/", PutElements)
+	r.POST("/initData", controllers.SetInitData)
+	r.GET("/nextEpoch", controllers.NextEpoch)
 	r.Run()
 	/*router = mux.NewRouter()
 	router.HandleFunc("/api/start", simulation).Methods("GET")
