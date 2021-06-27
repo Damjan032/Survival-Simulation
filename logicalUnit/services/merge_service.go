@@ -10,9 +10,7 @@ import (
 func Merge(population []*models.Individual, foodSources []*models.FoodSource) {
 	var populationFreeArray = utils.MakeArray(len(population))   //Lista id-ova
 	var foodSourcesFreeArray = utils.MakeArray(len(foodSources)) //Lista id-ova
-	//fmt.Printf("%v\n", populationFreeArray)
-	//fmt.Printf("%v\n", foodSourcesFreeArray)
-	// prolazim kroz listu dok svi ne nadju izvoe za hranu ili dok se ne popune svi izvori hrane
+	// prolazim kroz listu dok svi ne nadju izvori za hranu ili dok se ne popune svi izvori hrane
 	for len(populationFreeArray) != 0 {
 		// posto lista sadrzi sve id-jove uzmemo random iz nje
 		if len(foodSourcesFreeArray) == 0 {
@@ -47,26 +45,17 @@ func merge2(population []*models.Individual, foodSources []*models.FoodSource) {
 		if len(foodSourcesFreeArray) == 0 {
 			break
 		}
-		fmt.Println("DUZINAAAAA", len(foodSourcesFreeArray))
 		var randomFoodId = rand.Intn(len(foodSourcesFreeArray))
 		var foodSourceId = foodSourcesFreeArray[randomFoodId]
-		fmt.Println(foodSourceId)
 		if foodSources[foodSourceId].Occupied == 0 {
 			pleb.Resources = append(pleb.Resources, foodSources[foodSourceId].Resources[0])
 			foodSources[foodSourceId].Occupied++
 		} else {
 			pleb.Resources = append(pleb.Resources, foodSources[foodSourceId].Resources[1])
 			foodSources[foodSourceId].Occupied++
-			fmt.Println("UDJES LI ODJE")
-			fmt.Println("ID:", foodSourceId)
-			fmt.Println(len(foodSourcesFreeArray))
-			fmt.Printf("Niz: %v \n", foodSourcesFreeArray)
 			foodSourcesFreeArray = append(foodSourcesFreeArray[:randomFoodId], foodSourcesFreeArray[randomFoodId+1:]...)
-			fmt.Printf("Niz: %v \n", foodSourcesFreeArray)
-			fmt.Println(len(foodSourcesFreeArray))
 		}
 		//pleb.resources = append(pleb.resources, foodSources[foodSourceId])
-		//DJE CESO OVO DOLE, MACINJI AKO JE PUN
 		/*for !isFreeFoodSource(foodSources[foodSourceId]){
 			fmt.Println("USO MICO")
 			foodSourceId = rand.Intn(len(foodSources))

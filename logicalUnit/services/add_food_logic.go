@@ -11,12 +11,10 @@ func feedThePopulation(foodSources []*models.FoodSource) {
 
 func giveFoodToPleb(foodSource *models.FoodSource) {
 	if foodSource.Occupied == 0 {
-		//clearSource(foodSource)
 		return
 	}
 	if foodSource.Occupied == 1 {
 		foodSource.OccupiedBy[0].Health = len(foodSource.Resources) * 100
-		//clearSource(foodSource)
 		return
 	}
 	if foodSource.OccupiedBy[0].TypeOfIndividual == models.GOOD && foodSource.OccupiedBy[1].TypeOfIndividual == models.GOOD {

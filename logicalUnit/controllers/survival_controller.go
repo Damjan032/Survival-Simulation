@@ -47,12 +47,6 @@ func SetGlobals(c *gin.Context) {
 	lvl := c.PostForm("simulator-lvl")
 	utils.SetLvl(lvl)
 
-	fmt.Println(utils.Find(globals.Lvls, lvl))
-	fmt.Println(lvl)
-	fmt.Println(globals.FinalEpoch)
-	fmt.Println(globals.NumberOfFoodSources)
-	fmt.Println(globals.NumberOfBads)
-	fmt.Println(globals.NumberOfGoods)
 	SetInitData(c)
 	c.JSONP(200, gin.H{
 		"message": "sve ok",
@@ -61,7 +55,7 @@ func SetGlobals(c *gin.Context) {
 
 func SetInitData(c *gin.Context) {
 	rand.Seed(time.Now().UnixNano())
-	globals.CurrentEpoch = 0
+	globals.CurrentEpoch = -1
 	globals.Population = models.NewPopulation(globals.NumberOfBads, globals.NumberOfGoods)
 	globals.FoodSources = services.InitFoodSources(globals.NumberOfFoodSources)
 	fmt.Println("Set init data.")
@@ -71,7 +65,7 @@ func SetInitData(c *gin.Context) {
 }
 
 func NextEpoch(c *gin.Context) {
-	if globals.CurrentEpoch == 0 {
+	if globals.CurrentEpoch == -1 {
 		fmt.Println("I: ", globals.CurrentEpoch)
 		fmt.Println("BAD", globals.Population.NumberOfBad, " GOOD", globals.Population.NumberOfGood)
 		fmt.Println("SUM ", globals.Population.NumberOfBad+globals.Population.NumberOfGood)
@@ -81,8 +75,8 @@ func NextEpoch(c *gin.Context) {
 		sendResult(c)
 		return
 	}
-	if globals.CurrentEpoch > globals.FinalEpoch {
-		fmt.Println("Ne moze vise")
+	if globals.CurrentEpoch >= globals.FinalEpoch {
+		fmt.Println("Last epoch")
 		sendResult(c)
 		return
 	}
@@ -101,6 +95,11 @@ func NextEpoch(c *gin.Context) {
 }
 
 func ToTheEnd(c *gin.Context) {
+	if globals.CurrentEpoch >= globals.FinalEpoch {
+		fmt.Println("Last epoch")
+		sendResult(c)
+		return
+	}
 	for i := globals.CurrentEpoch; i <= globals.FinalEpoch; i++ {
 		fmt.Println("I: ", i)
 		services.ClearFoodSources(globals.FoodSources)

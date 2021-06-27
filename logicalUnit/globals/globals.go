@@ -4,7 +4,7 @@ import "../models"
 
 var Population *models.Population
 var FoodSources []*models.FoodSource
-var CurrentEpoch = 0
+var CurrentEpoch = -1
 var FinalEpoch = 100
 var NumberOfGoods = 5
 var NumberOfBads = 1
