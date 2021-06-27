@@ -17,7 +17,7 @@ const (
 
 type Individual struct {
 	Resources        []*Food           `json:"resources"`
-	TypeOfIndividual UnitType          `json:"type-of-individual"`
+	TypeOfIndividual UnitType          `json:"typeOfIndividual"`
 	Health           int               `json:"health"`
 	NightRes         ProductOfTheNight `json:"night-res"`
 }

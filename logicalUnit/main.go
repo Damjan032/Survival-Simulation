@@ -48,7 +48,7 @@ func simulation() {
 		fmt.Println("I: ", i)
 		services.Day(population.Members, foodSources)
 		//printPlebs(population.members)
-		services.Night(population, 10, 10)
+		services.Night(population)
 		fmt.Println("BAD", population.NumberOfBad, " GOOD", population.NumberOfGood)
 		fmt.Println("SUM ", population.NumberOfBad+population.NumberOfGood)
 	}

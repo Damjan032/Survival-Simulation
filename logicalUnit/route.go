@@ -24,22 +24,23 @@ func GetHelloWorld(c *gin.Context) {
 	//c.JSONP(200, string(btResult) )
 
 }
-func PutElements(c *gin.Context) {
-	var population = models.NewPopulation(1, 5)
-
-	var p = c.PostForm("search-field")
-	fmt.Println(p)
+func PostElements(c *gin.Context) {
+	//var p = c.PostForm("search-field")
+	var numberOfGoods = c.PostForm("number-of-goods")
+	fmt.Println(numberOfGoods)
 	c.JSONP(200, gin.H{
-		"message": population,
+		"message": "sve ok",
 	})
 
 }
 func initRouter() {
 	r.GET("/", GetHelloWorld)
 	r.GET("/toTheEnd", controllers.ToTheEnd)
-	r.POST("/", PutElements)
+	r.POST("/", PostElements)
+	r.POST("/setGlobals", controllers.SetGlobals)
 	r.POST("/initData", controllers.SetInitData)
 	r.GET("/nextEpoch", controllers.NextEpoch)
+	r.GET("/currentData", controllers.CurrentData)
 	r.Run()
 	/*router = mux.NewRouter()
 	router.HandleFunc("/api/start", simulation).Methods("GET")

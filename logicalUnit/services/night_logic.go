@@ -1,22 +1,21 @@
 package services
 
 import (
+	"../globals"
 	"../models"
 	"math/rand"
 	"sort"
 )
 
-const BoostToSurvive = 10
-const MutationPercent = 10
 const MaxHP = 100
 
-func Night(population *models.Population, percentToSurvive int, percentToReproduction int) {
-	nightEating(population.Members, percentToSurvive, percentToReproduction)
+func Night(population *models.Population) {
+	nightEating(population.Members)
 	doOrDie(population)
 
 }
 
-func nightEating(population []*models.Individual, percentToSurvive int, percentToReproduction int) {
+func nightEating(population []*models.Individual) {
 	for _, pleb := range population {
 		pleb.NightRes = nightTimeLogic(pleb)
 	}
@@ -55,7 +54,11 @@ func reproduceMember(population *models.Population, whiteList []int) []*models.I
 	var newMembers []*models.Individual
 	for i := 0; i < len(whiteList); i++ {
 		var newMember = models.NewIndividual(population.Members[whiteList[i]].TypeOfIndividual)
-		if calculateIsHappened(MutationPercent) {
+		var newMemberMutation = globals.MutationPercent
+		if newMember.TypeOfIndividual == models.BAD {
+			newMemberMutation += globals.MutationToGoodBoost
+		}
+		if calculateIsHappened(newMemberMutation) {
 			convertIndividualType(newMember)
 		}
 		if newMember.TypeOfIndividual == models.GOOD {
@@ -74,11 +77,11 @@ func nightTimeLogic(individual *models.Individual) models.ProductOfTheNight {
 		return models.DIED
 	}
 	if individual.Health < MaxHP {
-		if calculateIsHappened(MaxHP - individual.Health + BoostToSurvive) {
+		if calculateIsHappened(MaxHP - individual.Health + globals.BoostToSurvive) {
 			return models.DIED
 		}
 	} else if individual.Health >= MaxHP {
-		if calculateIsHappened(individual.Health - MaxHP + BoostToSurvive) {
+		if calculateIsHappened(individual.Health - MaxHP + globals.BoostToSurvive) {
 			//fmt.Println("UMNOZIO SE")
 			return models.REPRODUCED
 		}

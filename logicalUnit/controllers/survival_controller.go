@@ -1,54 +1,128 @@
 package controllers
 
 import (
+	"../dto"
 	"../globals"
 	"../models"
 	"../services"
+	"../utils"
+	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"math/rand"
+	"net/http"
+	"strconv"
 	"time"
 )
 
+func SetGlobals(c *gin.Context) {
+	numberOfGoods, err1 := strconv.Atoi(c.PostForm("number-of-goods"))
+	if err1 != nil {
+		fmt.Println("numberOfGoods cant found")
+	} else {
+		utils.SetNumberOfGoodIndividuals(numberOfGoods)
+	}
+
+	numberOfBads, err2 := strconv.Atoi(c.PostForm("number-of-bads"))
+	if err2 != nil {
+		fmt.Println("numberOfBads cant found")
+	} else {
+		utils.SetNumberOfBadIndividuals(numberOfBads)
+	}
+
+	numberOfFoodSources, err3 := strconv.Atoi(c.PostForm("number-of-food-sources"))
+	if err3 != nil {
+		fmt.Println("numberOfFoodSources cant found")
+	} else {
+		utils.SetNumberOfFoodSources(numberOfFoodSources)
+	}
+
+	numberOfEpoches, err4 := strconv.Atoi(c.PostForm("number-of-epoches"))
+	if err4 != nil {
+		fmt.Println("numberOfEpoches cant found")
+	} else {
+		utils.SetFinalEpoch(numberOfEpoches)
+	}
+
+	lvl := c.PostForm("simulator-lvl")
+	utils.SetLvl(lvl)
+
+	fmt.Println(utils.Find(globals.Lvls, lvl))
+	fmt.Println(lvl)
+	fmt.Println(globals.FinalEpoch)
+	fmt.Println(globals.NumberOfFoodSources)
+	fmt.Println(globals.NumberOfBads)
+	fmt.Println(globals.NumberOfGoods)
+	SetInitData(c)
+	c.JSONP(200, gin.H{
+		"message": "sve ok",
+	})
+}
+
 func SetInitData(c *gin.Context) {
 	rand.Seed(time.Now().UnixNano())
-	globals.Population = models.NewPopulation(1, 5)
-	globals.FoodSources = services.InitFoodSources(1000)
+	globals.CurrentEpoch = 0
+	globals.Population = models.NewPopulation(globals.NumberOfBads, globals.NumberOfGoods)
+	globals.FoodSources = services.InitFoodSources(globals.NumberOfFoodSources)
 	fmt.Println("Set init data.")
-	fmt.Println("I: ", globals.CurrentEpoch)
-	fmt.Println("BAD", globals.Population.NumberOfBad, " GOOD", globals.Population.NumberOfGood)
-	fmt.Println("SUM ", globals.Population.NumberOfBad+globals.Population.NumberOfGood)
-	fmt.Println("-------------------------------------------------------------------------")
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Configuration set successfully.",
+	})
 }
 
 func NextEpoch(c *gin.Context) {
-	globals.CurrentEpoch += 1
-	fmt.Println(globals.CurrentEpoch)
-	fmt.Println(globals.FinalEpoch)
-	fmt.Println(globals.CurrentEpoch > globals.FinalEpoch)
+	if globals.CurrentEpoch == 0 {
+		fmt.Println("I: ", globals.CurrentEpoch)
+		fmt.Println("BAD", globals.Population.NumberOfBad, " GOOD", globals.Population.NumberOfGood)
+		fmt.Println("SUM ", globals.Population.NumberOfBad+globals.Population.NumberOfGood)
+		fmt.Println("-------------------------------------------------------------------------")
+		services.Day(globals.Population.Members, globals.FoodSources)
+		globals.CurrentEpoch += 1
+		sendResult(c)
+		return
+	}
 	if globals.CurrentEpoch > globals.FinalEpoch {
 		fmt.Println("Ne moze vise")
+		sendResult(c)
 		return
 	}
 	fmt.Println("I: ", globals.CurrentEpoch)
+	services.ClearFoodSources(globals.FoodSources)
+	services.Night(globals.Population)
 	services.Day(globals.Population.Members, globals.FoodSources)
 	//printPlebs(population.members)
-	services.Night(globals.Population, 10, 10)
+
 	fmt.Println("BAD", globals.Population.NumberOfBad, " GOOD", globals.Population.NumberOfGood)
 	fmt.Println("SUM ", globals.Population.NumberOfBad+globals.Population.NumberOfGood)
 	fmt.Println("-------------------------------------------------------------------------")
+	globals.CurrentEpoch += 1
+	sendResult(c)
 
 }
 
 func ToTheEnd(c *gin.Context) {
-	for i := globals.CurrentEpoch + 1; i <= globals.FinalEpoch; i++ {
+	for i := globals.CurrentEpoch; i <= globals.FinalEpoch; i++ {
 		fmt.Println("I: ", i)
+		services.ClearFoodSources(globals.FoodSources)
+		services.Night(globals.Population)
 		services.Day(globals.Population.Members, globals.FoodSources)
-		//printPlebs(population.members)
-		services.Night(globals.Population, 10, 10)
-		fmt.Println("BAD", globals.Population.NumberOfBad, " GOOD", globals.Population.NumberOfGood)
-		fmt.Println("SUM ", globals.Population.NumberOfBad+globals.Population.NumberOfGood)
-		fmt.Println("-------------------------------------------------------------------------")
 	}
+	fmt.Println("BAD", globals.Population.NumberOfBad, " GOOD", globals.Population.NumberOfGood)
+	globals.CurrentEpoch = globals.FinalEpoch
+	sendResult(c)
 
+}
+
+func CurrentData(c *gin.Context) {
+	sendResult(c)
+}
+func sendResult(c *gin.Context) {
+	foodSourcesDto := new(dto.FoodSourcesDto)
+	foodSourcesDto.FoodSources = globals.FoodSources
+	foodSourcesDto.CurrentEpoch = globals.CurrentEpoch
+	foodSourcesDto.FinalEpoch = globals.FinalEpoch
+	foodSourcesDto.NumberOfGood = globals.Population.NumberOfGood
+	foodSourcesDto.NumberOfBad = globals.Population.NumberOfBad
+	btResult, _ := json.Marshal(foodSourcesDto)
+	c.Data(http.StatusOK, "application/json", btResult)
 }
