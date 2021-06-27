@@ -1,0 +1,1 @@
+point := 2@3.m := point aspect x useSlot readOnly autoAcceptValues asValueHolder.p := SpCheckBoxPresenter on: m options: ds.p openInWindow.m value: 1000.

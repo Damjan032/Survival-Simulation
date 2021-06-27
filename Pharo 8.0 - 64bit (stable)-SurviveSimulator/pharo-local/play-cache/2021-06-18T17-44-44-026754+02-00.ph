@@ -1,0 +1,1 @@
+view := RTView new.	es := (RTEllipse new size: 12; color: Color blue)		elementsOn: (1 to: 30).	view addAll: es.	RTEdgeBuilder new		view: view;		elements: es;		connectFrom: [ :value | value // 2 ].		es do: [ :each | each translateTo: (100 atRandom) @ (100 atRandom) ].	view

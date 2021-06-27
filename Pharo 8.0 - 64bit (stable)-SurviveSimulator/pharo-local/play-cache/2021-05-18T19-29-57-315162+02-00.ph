@@ -1,0 +1,1 @@
+client := Dictionary new.client at: #name put: 'James'; 		 at: #surname put: 'Bond'; 		at: #adres put: 'Serbia'.

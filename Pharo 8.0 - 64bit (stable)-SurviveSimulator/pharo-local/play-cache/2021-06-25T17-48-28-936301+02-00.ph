@@ -1,0 +1,1 @@
+sp := SimulationDataSetterUI  new.sp openWithSpec .Transcript clear.v := SimulationView  new.v initView.

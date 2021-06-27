@@ -1,0 +1,210 @@
+[31mInstance of SpRadioButtonPresenter did not understand #stat
+[0mSpRadioButtonPresenter(Object)>>doesNotUnderstand: #stat
+[ :arg1 | 
+arg1
+	<<
+		(button1 stat
+			ifTrue: [ 'easy' ] asString).
+button2 stat
+	ifTrue: [ 'normal' ] asString.
+button2 stat
+	ifTrue: [ 'hard' ] asString ] in [ | tmp6 |
+"tmp6 := ZnClient new.
+			tmp6
+				url: 'http://localhost:8080/setGlobals';
+				timeout: 1000;
+				addPart:
+					(ZnMimePart
+						fieldName: 'search-field'
+						value:
+							button2 label asString , ' ' , button2 label asString , ' '
+								, numberOfGoods text asString);
+				addPart: (ZnMimePart fieldName: 'number-of-goods' value: numberOfGoods text);
+				addPart:
+					(ZnMimePart
+						fieldName: 'number-of-food-sources'
+						value: numberOfFoodSources text);
+				addPart: (ZnMimePart fieldName: 'number-of-bads' value: numberOfBads text);
+				post."
+'D:\testfile.txt' asFileReference
+	writeStreamDo: [ :arg1 | 
+		arg1
+			<<
+				(button1 stat
+					ifTrue: [ 'easy' ] asString).
+		button2 stat
+			ifTrue: [ 'normal' ] asString.
+		button2 stat
+			ifTrue: [ 'hard' ] asString ].
+(Delay forSeconds: 1) wait.
+self window close ] in SimulationDataSetterUI>>initializePresenters in Block: [ :arg1 | ...
+[ arg1 value: tmp1 ] in FileReference(AbstractFileReference)>>writeStreamDo: in Block: [ arg1 value: tmp1 ]
+BlockClosure>>ensure:
+FileReference(AbstractFileReference)>>writeStreamDo:
+[ | tmp6 |
+"tmp6 := ZnClient new.
+			tmp6
+				url: 'http://localhost:8080/setGlobals';
+				timeout: 1000;
+				addPart:
+					(ZnMimePart
+						fieldName: 'search-field'
+						value:
+							button2 label asString , ' ' , button2 label asString , ' '
+								, numberOfGoods text asString);
+				addPart: (ZnMimePart fieldName: 'number-of-goods' value: numberOfGoods text);
+				addPart:
+					(ZnMimePart
+						fieldName: 'number-of-food-sources'
+						value: numberOfFoodSources text);
+				addPart: (ZnMimePart fieldName: 'number-of-bads' value: numberOfBads text);
+				post."
+'D:\testfile.txt' asFileReference
+	writeStreamDo: [ :arg1 | 
+		arg1
+			<<
+				(button1 stat
+					ifTrue: [ 'easy' ] asString).
+		button2 stat
+			ifTrue: [ 'normal' ] asString.
+		button2 stat
+			ifTrue: [ 'hard' ] asString ].
+(Delay forSeconds: 1) wait.
+self window close ] in SimulationDataSetterUI>>initializePresenters in Block: [ | tmp6 |...
+SpButtonPresenter>>performAction
+SpMorphicButtonAdapter>>action
+PluggableButtonMorph>>performAction:
+[ :arg3 | 
+(arg3 containsPoint: arg1 cursorPoint)
+	ifTrue: [ arg3 enabled
+			ifTrue: [ arg3 performAction: arg1 ] ] ] in PluggableButtonMorph>>mouseUp: in Block: [ :arg3 | ...
+Array(SequenceableCollection)>>do:
+PluggableButtonMorph>>mouseUp:
+PluggableButtonMorph(Morph)>>handleMouseUp:
+MouseButtonEvent>>sentTo:
+PluggableButtonMorph(Morph)>>handleEvent:
+PluggableButtonMorph(Morph)>>handleFocusEvent:
+[ ActiveHand := self.
+ActiveEvent := arg1.
+tmp3 := arg2
+	handleFocusEvent: (arg1 transformedBy: (arg2 transformedFrom: self)) ] in HandMorph>>sendFocusEvent:to:clear: in Block: [ ActiveHand := self....
+BlockClosure>>on:do:
+WorldMorph>>becomeActiveDuring:
+HandMorph>>sendFocusEvent:to:clear:
+HandMorph>>sendEvent:focus:clear:
+HandMorph>>sendMouseEvent:
+HandMorph>>handleEvent:
+HandMorph>>processEventsFromQueue:
+HandMorph>>processEvents
+[ :arg2 | 
+self activeHand: arg2.
+arg2 processEvents.
+self activeHand: nil ] in WorldState>>doOneCycleNowFor: in Block: [ :arg2 | ...
+Array(SequenceableCollection)>>do:
+WorldState>>handsDo:
+WorldState>>doOneCycleNowFor:
+WorldState>>doOneCycleFor:
+[0m[31mInstance of ZnCharacterWriteStream did not understand #<
+[0mZnCharacterWriteStream(Object)>>doesNotUnderstand: #<
+[ :arg1 | 
+arg1
+	<
+		(button1 state
+			ifTrue: [ 'easy' ]
+			ifFalse: [ button2 state
+					ifTrue: [ 'normal' ]
+					ifFalse: [ 'hard' ] ]) ] in [ | tmp6 |
+"tmp6 := ZnClient new.
+			tmp6
+				url: 'http://localhost:8080/setGlobals';
+				timeout: 1000;
+				addPart:
+					(ZnMimePart
+						fieldName: 'search-field'
+						value:
+							button2 label asString , ' ' , button2 label asString , ' '
+								, numberOfGoods text asString);
+				addPart: (ZnMimePart fieldName: 'number-of-goods' value: numberOfGoods text);
+				addPart:
+					(ZnMimePart
+						fieldName: 'number-of-food-sources'
+						value: numberOfFoodSources text);
+				addPart: (ZnMimePart fieldName: 'number-of-bads' value: numberOfBads text);
+				post."
+'D:\testfile.txt' asFileReference
+	writeStreamDo: [ :arg1 | 
+		arg1
+			<
+				(button1 state
+					ifTrue: [ 'easy' ]
+					ifFalse: [ button2 state
+							ifTrue: [ 'normal' ]
+							ifFalse: [ 'hard' ] ]) ].
+(Delay forSeconds: 1) wait.
+self window close ] in SimulationDataSetterUI>>initializePresenters in Block: [ :arg1 | ...
+[ arg1 value: tmp1 ] in FileReference(AbstractFileReference)>>writeStreamDo: in Block: [ arg1 value: tmp1 ]
+BlockClosure>>ensure:
+FileReference(AbstractFileReference)>>writeStreamDo:
+[ | tmp6 |
+"tmp6 := ZnClient new.
+			tmp6
+				url: 'http://localhost:8080/setGlobals';
+				timeout: 1000;
+				addPart:
+					(ZnMimePart
+						fieldName: 'search-field'
+						value:
+							button2 label asString , ' ' , button2 label asString , ' '
+								, numberOfGoods text asString);
+				addPart: (ZnMimePart fieldName: 'number-of-goods' value: numberOfGoods text);
+				addPart:
+					(ZnMimePart
+						fieldName: 'number-of-food-sources'
+						value: numberOfFoodSources text);
+				addPart: (ZnMimePart fieldName: 'number-of-bads' value: numberOfBads text);
+				post."
+'D:\testfile.txt' asFileReference
+	writeStreamDo: [ :arg1 | 
+		arg1
+			<
+				(button1 state
+					ifTrue: [ 'easy' ]
+					ifFalse: [ button2 state
+							ifTrue: [ 'normal' ]
+							ifFalse: [ 'hard' ] ]) ].
+(Delay forSeconds: 1) wait.
+self window close ] in SimulationDataSetterUI>>initializePresenters in Block: [ | tmp6 |...
+SpButtonPresenter>>performAction
+SpMorphicButtonAdapter>>action
+PluggableButtonMorph>>performAction:
+[ :arg3 | 
+(arg3 containsPoint: arg1 cursorPoint)
+	ifTrue: [ arg3 enabled
+			ifTrue: [ arg3 performAction: arg1 ] ] ] in PluggableButtonMorph>>mouseUp: in Block: [ :arg3 | ...
+Array(SequenceableCollection)>>do:
+PluggableButtonMorph>>mouseUp:
+PluggableButtonMorph(Morph)>>handleMouseUp:
+MouseButtonEvent>>sentTo:
+PluggableButtonMorph(Morph)>>handleEvent:
+PluggableButtonMorph(Morph)>>handleFocusEvent:
+[ ActiveHand := self.
+ActiveEvent := arg1.
+tmp3 := arg2
+	handleFocusEvent: (arg1 transformedBy: (arg2 transformedFrom: self)) ] in HandMorph>>sendFocusEvent:to:clear: in Block: [ ActiveHand := self....
+BlockClosure>>on:do:
+WorldMorph>>becomeActiveDuring:
+HandMorph>>sendFocusEvent:to:clear:
+HandMorph>>sendEvent:focus:clear:
+HandMorph>>sendMouseEvent:
+HandMorph>>handleEvent:
+HandMorph>>processEventsFromQueue:
+HandMorph>>processEvents
+[ :arg2 | 
+self activeHand: arg2.
+arg2 processEvents.
+self activeHand: nil ] in WorldState>>doOneCycleNowFor: in Block: [ :arg2 | ...
+Array(SequenceableCollection)>>do:
+WorldState>>handsDo:
+WorldState>>doOneCycleNowFor:
+WorldState>>doOneCycleFor:
+[0m

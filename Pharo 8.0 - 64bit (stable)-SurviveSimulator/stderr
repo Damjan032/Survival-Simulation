@@ -1,0 +1,2258 @@
+[31m#elements was sent to nil
+[0mUndefinedObject(Object)>>doesNotUnderstand: #elements
+UndefinedObject>>doesNotUnderstand: #elements
+'Next day' in SimulationView>>initView in Block: 'Next day'
+[ :arg5 | arg2 value ] in TRCanvas>>addMenu:callback: in Block: [ :arg5 | arg2 value ]
+BlockClosure>>cull:
+BlockClosure>>cull:cull:
+[ action cull: arg1 cull: announcer ] in AnnouncementSubscription>>deliver: in Block: [ action cull: arg1 cull: announcer ]
+BlockClosure>>on:do:
+[ Processor terminateActive ] in [ :arg3 | 
+| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+tmp2 := thisContext.
+tmp6 := tmp2 home.
+[ tmp2 sender == tmp6 ]
+	whileFalse: [ tmp2 := tmp2 sender.
+		tmp2 ifNil: [ ^ arg2 cull: arg3 ] ].
+tmp5 := [ Processor terminateActive ] asContext.
+tmp2 privSender: tmp5.
+tmp4 := [ arg2 cull: arg3 ] asContext.
+tmp4 privSender: thisContext sender.
+(Process forContext: tmp4 priority: Processor activePriority) resume.
+thisContext privSender: tmp6 ] in BlockClosure>>on:fork: in Block: [ Processor terminateActive ]
+[0m[31m#elements was sent to nil
+[0mUndefinedObject(Object)>>doesNotUnderstand: #elements
+UndefinedObject>>doesNotUnderstand: #elements
+tmp1 addNode: tmp13 in SimulationView>>initView in Block: tmp1 addNode: tmp13
+[ :arg5 | arg2 value ] in TRCanvas>>addMenu:callback: in Block: [ :arg5 | arg2 value ]
+BlockClosure>>cull:
+BlockClosure>>cull:cull:
+[ action cull: arg1 cull: announcer ] in AnnouncementSubscription>>deliver: in Block: [ action cull: arg1 cull: announcer ]
+BlockClosure>>on:do:
+[ Processor terminateActive ] in [ :arg3 | 
+| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+tmp2 := thisContext.
+tmp6 := tmp2 home.
+[ tmp2 sender == tmp6 ]
+	whileFalse: [ tmp2 := tmp2 sender.
+		tmp2 ifNil: [ ^ arg2 cull: arg3 ] ].
+tmp5 := [ Processor terminateActive ] asContext.
+tmp2 privSender: tmp5.
+tmp4 := [ arg2 cull: arg3 ] asContext.
+tmp4 privSender: thisContext sender.
+(Process forContext: tmp4 priority: Processor activePriority) resume.
+thisContext privSender: tmp6 ] in BlockClosure>>on:fork: in Block: [ Processor terminateActive ]
+[0m[31m#add: was sent to nil
+[0mUndefinedObject(Object)>>doesNotUnderstand: #add:
+UndefinedObject>>doesNotUnderstand: #add:
+tmp24 cr in [ | tmp7 tmp8 tmp9 tmp11 tmp12 tmp13 tmp14 tmp15 tmp16 tmp18 tmp20 tmp22 tmp24 tmp26 |
+tmp18 := ZnClient new.
+tmp18
+	url: 'http://localhost:8080/toTheEnd';
+	enforceHttpSuccess: true;
+	accept: ZnMimeType applicationJson;
+	timeout: 1000;
+	contentReader: [ :arg1 | NeoJSONReader fromString: arg1 contents ].
+tmp7 := tmp18 get.
+tmp8 := self elements size.
+tmp8 ~= 0
+	ifTrue: [ tmp9 := tmp8 - 1.
+		1 to: tmp9 do: [ :tmp10 | (self elements at: tmp8 - tmp10) remove ].
+		self elements atRandom remove ].
+Transcript
+	show: 'Epoche: ';
+	show: (tmp7 at: #currentEpoch);
+	show: '/'.
+tmp20 := Transcript.
+tmp20
+	show: (tmp7 at: #finalEpoch);
+	cr.
+Transcript show: 'Number of good individuals: '.
+tmp22 := Transcript.
+tmp22
+	show: (tmp7 at: #NumberOfGood);
+	cr.
+Transcript show: 'Number of bad individuals: '.
+tmp24 := Transcript.
+tmp24
+	show: (tmp7 at: #NumberOfBad);
+	cr.
+tmp26 := Transcript.
+tmp26
+	show: '-----------------------------------------------';
+	cr.
+(tmp7 at: #foodSources)
+	do: [ :arg2 | 
+		| tmp28 |
+		tmp28 := RTEllipse new.
+		tmp28 size: 30.
+		tmp16 := (tmp28 color: (Color green alpha: 0.4)) element.
+		tmp16
+			@ RTDraggable;
+			translateTo: 1 atRandom @ 1 atRandom.
+		self add: tmp16.
+		(arg2 at: #Occupied) = 0
+			ifTrue: [ tmp1 addNode: tmp16 ].
+		(arg2 at: #Occupied) = 1
+			ifTrue: [ | tmp30 |
+				tmp15 := Color blue.
+				(((arg2 at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ tmp15 := Color red ].
+				tmp30 := RTEllipse new.
+				tmp30 size: 30.
+				tmp12 := (tmp30 color: (tmp15 alpha: 0.4)) element.
+				tmp12
+					@ RTDraggable;
+					translateTo: 1 atRandom @ 1 atRandom.
+				self add: tmp12.
+				tmp14 := RTLine edgeFrom: tmp12 to: tmp16.
+				v add: tmp14.
+				tmp1
+					addNode: tmp16;
+					addNode: tmp12;
+					addEdge: tmp14 ].
+		(arg2 at: #Occupied) = 2
+			ifTrue: [ | tmp32 tmp34 |
+				tmp15 := Color blue.
+				(((arg2 at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ tmp15 := Color red ].
+				tmp32 := RTEllipse new.
+				tmp32 size: 30.
+				tmp12 := (tmp32 color: (tmp15 alpha: 0.4)) element.
+				tmp12
+					@ RTDraggable;
+					translateTo: 1 atRandom @ 1 atRandom.
+				self add: tmp12.
+				tmp15 := Color blue.
+				(((arg2 at: #OccupiedBy) at: 2) at: #typeOfIndividual) = 1
+					ifTrue: [ tmp15 := Color red ].
+				tmp34 := RTEllipse new.
+				tmp34 size: 30.
+				tmp13 := (tmp34 color: (tmp15 alpha: 0.4)) element.
+				tmp13
+					@ RTDraggable;
+					translateTo: 5 atRandom @ 5 atRandom.
+				self add: tmp13.
+				tmp14 := RTLine edgeFrom: tmp12 to: tmp16.
+				tmp11 := RTLine edgeFrom: tmp13 to: tmp16.
+				self
+					add: tmp14;
+					add: tmp11.
+				tmp1
+					addNode: tmp16;
+					addNode: tmp12;
+					addEdge: tmp14;
+					addNode: tmp13;
+					addEdge: tmp11 ] ].
+self signalUpdate ] in SimulationView>>initView in Block: tmp24 cr
+Array(SequenceableCollection)>>do:
+[ | tmp7 tmp8 tmp9 tmp11 tmp12 tmp13 tmp14 tmp15 tmp16 tmp18 tmp20 tmp22 tmp24 tmp26 |
+tmp18 := ZnClient new.
+tmp18
+	url: 'http://localhost:8080/toTheEnd';
+	enforceHttpSuccess: true;
+	accept: ZnMimeType applicationJson;
+	timeout: 1000;
+	contentReader: [ :arg1 | NeoJSONReader fromString: arg1 contents ].
+tmp7 := tmp18 get.
+tmp8 := self elements size.
+tmp8 ~= 0
+	ifTrue: [ tmp9 := tmp8 - 1.
+		1 to: tmp9 do: [ :tmp10 | (self elements at: tmp8 - tmp10) remove ].
+		self elements atRandom remove ].
+Transcript
+	show: 'Epoche: ';
+	show: (tmp7 at: #currentEpoch);
+	show: '/'.
+tmp20 := Transcript.
+tmp20
+	show: (tmp7 at: #finalEpoch);
+	cr.
+Transcript show: 'Number of good individuals: '.
+tmp22 := Transcript.
+tmp22
+	show: (tmp7 at: #NumberOfGood);
+	cr.
+Transcript show: 'Number of bad individuals: '.
+tmp24 := Transcript.
+tmp24
+	show: (tmp7 at: #NumberOfBad);
+	cr.
+tmp26 := Transcript.
+tmp26
+	show: '-----------------------------------------------';
+	cr.
+(tmp7 at: #foodSources)
+	do: [ :arg2 | 
+		| tmp28 |
+		tmp28 := RTEllipse new.
+		tmp28 size: 30.
+		tmp16 := (tmp28 color: (Color green alpha: 0.4)) element.
+		tmp16
+			@ RTDraggable;
+			translateTo: 1 atRandom @ 1 atRandom.
+		self add: tmp16.
+		(arg2 at: #Occupied) = 0
+			ifTrue: [ tmp1 addNode: tmp16 ].
+		(arg2 at: #Occupied) = 1
+			ifTrue: [ | tmp30 |
+				tmp15 := Color blue.
+				(((arg2 at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ tmp15 := Color red ].
+				tmp30 := RTEllipse new.
+				tmp30 size: 30.
+				tmp12 := (tmp30 color: (tmp15 alpha: 0.4)) element.
+				tmp12
+					@ RTDraggable;
+					translateTo: 1 atRandom @ 1 atRandom.
+				self add: tmp12.
+				tmp14 := RTLine edgeFrom: tmp12 to: tmp16.
+				v add: tmp14.
+				tmp1
+					addNode: tmp16;
+					addNode: tmp12;
+					addEdge: tmp14 ].
+		(arg2 at: #Occupied) = 2
+			ifTrue: [ | tmp32 tmp34 |
+				tmp15 := Color blue.
+				(((arg2 at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ tmp15 := Color red ].
+				tmp32 := RTEllipse new.
+				tmp32 size: 30.
+				tmp12 := (tmp32 color: (tmp15 alpha: 0.4)) element.
+				tmp12
+					@ RTDraggable;
+					translateTo: 1 atRandom @ 1 atRandom.
+				self add: tmp12.
+				tmp15 := Color blue.
+				(((arg2 at: #OccupiedBy) at: 2) at: #typeOfIndividual) = 1
+					ifTrue: [ tmp15 := Color red ].
+				tmp34 := RTEllipse new.
+				tmp34 size: 30.
+				tmp13 := (tmp34 color: (tmp15 alpha: 0.4)) element.
+				tmp13
+					@ RTDraggable;
+					translateTo: 5 atRandom @ 5 atRandom.
+				self add: tmp13.
+				tmp14 := RTLine edgeFrom: tmp12 to: tmp16.
+				tmp11 := RTLine edgeFrom: tmp13 to: tmp16.
+				self
+					add: tmp14;
+					add: tmp11.
+				tmp1
+					addNode: tmp16;
+					addNode: tmp12;
+					addEdge: tmp14;
+					addNode: tmp13;
+					addEdge: tmp11 ] ].
+self signalUpdate ] in SimulationView>>initView in Block: [ | tmp7 tmp8 tmp9 tmp11 tmp12 tmp13 tmp14 tmp15 t...etc...
+[ :arg5 | arg2 value ] in TRCanvas>>addMenu:callback: in Block: [ :arg5 | arg2 value ]
+BlockClosure>>cull:
+BlockClosure>>cull:cull:
+[ action cull: arg1 cull: announcer ] in AnnouncementSubscription>>deliver: in Block: [ action cull: arg1 cull: announcer ]
+BlockClosure>>on:do:
+[ Processor terminateActive ] in [ :arg3 | 
+| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+tmp2 := thisContext.
+tmp6 := tmp2 home.
+[ tmp2 sender == tmp6 ]
+	whileFalse: [ tmp2 := tmp2 sender.
+		tmp2 ifNil: [ ^ arg2 cull: arg3 ] ].
+tmp5 := [ Processor terminateActive ] asContext.
+tmp2 privSender: tmp5.
+tmp4 := [ arg2 cull: arg3 ] asContext.
+tmp4 privSender: thisContext sender.
+(Process forContext: tmp4 priority: Processor activePriority) resume.
+thisContext privSender: tmp6 ] in BlockClosure>>on:fork: in Block: [ Processor terminateActive ]
+[0m[31mInstance of ByteString did not understand #text
+[0mByteString(Object)>>doesNotUnderstand: #text
+[ | tmp6 tmp7 |
+tmp6 := ZnClient new.
+tmp7 := (button1 state
+	ifTrue: [ 'easy' ]
+	ifFalse: [ button2 state
+			ifTrue: [ 'normal' ]
+			ifFalse: [ 'hard' ] ]) asString.
+Transcript show: tmp7.
+tmp6
+	url: 'http://localhost:8080/setGlobals';
+	timeout: 1000;
+	addPart:
+		(ZnMimePart
+			fieldName: 'search-field'
+			value:
+				button2 label asString , ' ' , button2 label asString , ' '
+					, numberOfGoods text asString);
+	addPart: (ZnMimePart fieldName: 'number-of-goods' value: numberOfGoods text);
+	addPart:
+		(ZnMimePart
+			fieldName: 'number-of-food-sources'
+			value: numberOfFoodSources text);
+	addPart: (ZnMimePart fieldName: 'number-of-bads' value: numberOfBads text);
+	addPart: (ZnMimePart fieldName: 'lvl' value: tmp7 text);
+	post.
+'D:\testfile.txt' asFileReference
+	writeStreamDo: [ :arg1 | 
+		arg1
+			<<
+				(button1 state
+					ifTrue: [ 'easy' ]
+					ifFalse: [ button2 state
+							ifTrue: [ 'normal' ]
+							ifFalse: [ 'hard' ] ]) ].
+(Delay forSeconds: 1) wait.
+self window close ] in SimulationDataSetterUI>>initializePresenters in Block: [ | tmp6 tmp7 |...
+SpButtonPresenter>>performAction
+SpMorphicButtonAdapter>>action
+PluggableButtonMorph>>performAction:
+[ :arg3 | 
+(arg3 containsPoint: arg1 cursorPoint)
+	ifTrue: [ arg3 enabled
+			ifTrue: [ arg3 performAction: arg1 ] ] ] in PluggableButtonMorph>>mouseUp: in Block: [ :arg3 | ...
+Array(SequenceableCollection)>>do:
+PluggableButtonMorph>>mouseUp:
+PluggableButtonMorph(Morph)>>handleMouseUp:
+MouseButtonEvent>>sentTo:
+PluggableButtonMorph(Morph)>>handleEvent:
+PluggableButtonMorph(Morph)>>handleFocusEvent:
+[ ActiveHand := self.
+ActiveEvent := arg1.
+tmp3 := arg2
+	handleFocusEvent: (arg1 transformedBy: (arg2 transformedFrom: self)) ] in HandMorph>>sendFocusEvent:to:clear: in Block: [ ActiveHand := self....
+BlockClosure>>on:do:
+WorldMorph>>becomeActiveDuring:
+HandMorph>>sendFocusEvent:to:clear:
+HandMorph>>sendEvent:focus:clear:
+HandMorph>>sendMouseEvent:
+HandMorph>>handleEvent:
+HandMorph>>processEventsFromQueue:
+HandMorph>>processEvents
+[ :arg2 | 
+self activeHand: arg2.
+arg2 processEvents.
+self activeHand: nil ] in WorldState>>doOneCycleNowFor: in Block: [ :arg2 | ...
+Array(SequenceableCollection)>>do:
+WorldState>>handsDo:
+WorldState>>doOneCycleNowFor:
+WorldState>>doOneCycleFor:
+WorldMorph>>doOneCycle
+WorldMorph class>>doOneCycle
+[ [ WorldMorph doOneCycle.
+Processor yield.
+false ] whileFalse: [  ] ] in MorphicUIManager>>spawnNewProcess in Block: [ [ WorldMorph doOneCycle....
+[ self value.
+Processor terminateActive ] in BlockClosure>>newProcess in Block: [ self value....
+[0m[31mInstance of ByteString did not understand #text
+[0mByteString(Object)>>doesNotUnderstand: #text
+[ | tmp6 tmp7 |
+tmp6 := ZnClient new.
+tmp7 := (button1 state
+	ifTrue: [ 'easy' ]
+	ifFalse: [ button2 state
+			ifTrue: [ 'normal' ]
+			ifFalse: [ 'hard' ] ]) asString.
+Transcript show: tmp7.
+tmp6
+	url: 'http://localhost:8080/setGlobals';
+	timeout: 1000;
+	addPart:
+		(ZnMimePart
+			fieldName: 'search-field'
+			value:
+				button2 label asString , ' ' , button2 label asString , ' '
+					, numberOfGoods text asString);
+	addPart: (ZnMimePart fieldName: 'number-of-goods' value: numberOfGoods text);
+	addPart:
+		(ZnMimePart
+			fieldName: 'number-of-food-sources'
+			value: numberOfFoodSources text);
+	addPart: (ZnMimePart fieldName: 'number-of-bads' value: numberOfBads text);
+	addPart: (ZnMimePart fieldName: 'lvl' value: tmp7 text);
+	post.
+'D:\testfile.txt' asFileReference
+	writeStreamDo: [ :arg1 | 
+		arg1
+			<<
+				(button1 state
+					ifTrue: [ 'easy' ]
+					ifFalse: [ button2 state
+							ifTrue: [ 'normal' ]
+							ifFalse: [ 'hard' ] ]) ].
+(Delay forSeconds: 1) wait.
+self window close ] in SimulationDataSetterUI>>initializePresenters in Block: [ | tmp6 tmp7 |...
+SpButtonPresenter>>performAction
+SpMorphicButtonAdapter>>action
+PluggableButtonMorph>>performAction:
+[ :arg3 | 
+(arg3 containsPoint: arg1 cursorPoint)
+	ifTrue: [ arg3 enabled
+			ifTrue: [ arg3 performAction: arg1 ] ] ] in PluggableButtonMorph>>mouseUp: in Block: [ :arg3 | ...
+Array(SequenceableCollection)>>do:
+PluggableButtonMorph>>mouseUp:
+PluggableButtonMorph(Morph)>>handleMouseUp:
+MouseButtonEvent>>sentTo:
+PluggableButtonMorph(Morph)>>handleEvent:
+PluggableButtonMorph(Morph)>>handleFocusEvent:
+[ ActiveHand := self.
+ActiveEvent := arg1.
+tmp3 := arg2
+	handleFocusEvent: (arg1 transformedBy: (arg2 transformedFrom: self)) ] in HandMorph>>sendFocusEvent:to:clear: in Block: [ ActiveHand := self....
+BlockClosure>>on:do:
+WorldMorph>>becomeActiveDuring:
+HandMorph>>sendFocusEvent:to:clear:
+HandMorph>>sendEvent:focus:clear:
+HandMorph>>sendMouseEvent:
+HandMorph>>handleEvent:
+HandMorph>>processEventsFromQueue:
+HandMorph>>processEvents
+[ :arg2 | 
+self activeHand: arg2.
+arg2 processEvents.
+self activeHand: nil ] in WorldState>>doOneCycleNowFor: in Block: [ :arg2 | ...
+Array(SequenceableCollection)>>do:
+WorldState>>handsDo:
+WorldState>>doOneCycleNowFor:
+WorldState>>doOneCycleFor:
+WorldMorph>>doOneCycle
+WorldMorph class>>doOneCycle
+[ [ WorldMorph doOneCycle.
+Processor yield.
+false ] whileFalse: [  ] ] in MorphicUIManager>>spawnNewProcess in Block: [ [ WorldMorph doOneCycle....
+[ self value.
+Processor terminateActive ] in BlockClosure>>newProcess in Block: [ self value....
+[0m[31mError: Instances of True are not indexable
+[0mTrue(Object)>>error:
+True(Object)>>errorNotIndexable
+True(Object)>>size
+ZnByteArrayEntity class>>bytes:
+ZnEntity class>>bytes:
+ZnEntity class>>with:
+ZnMimePart class>>fieldName:value:
+[ | tmp6 tmp7 |
+tmp6 := ZnClient new.
+tmp7 := (button1 state
+	ifTrue: [ 'easy' ]
+	ifFalse: [ button2 state
+			ifTrue: [ 'normal' ]
+			ifFalse: [ 'hard' ] ]) asString.
+Transcript show: tmp7.
+tmp6
+	url: 'http://localhost:8080/setGlobals';
+	timeout: 1000;
+	addPart:
+		(ZnMimePart
+			fieldName: 'search-field'
+			value:
+				button2 label asString , ' ' , button2 label asString , ' '
+					, numberOfGoods text asString);
+	addPart: (ZnMimePart fieldName: 'number-of-goods' value: numberOfGoods text);
+	addPart:
+		(ZnMimePart
+			fieldName: 'number-of-food-sources'
+			value: numberOfFoodSources text);
+	addPart: (ZnMimePart fieldName: 'number-of-bads' value: numberOfBads text);
+	addPart: (ZnMimePart fieldName: 'simulator-lvl' value: tmp7);
+	addPart:
+		(ZnMimePart
+			fieldName: 'lvl'
+			value:
+				(button1 state
+					ifTrue: [ 'easy' ]
+					ifFalse: [ button2 state
+							ifTrue: [ 'normal' ]
+							ifFalse: [ 'hard' ] ]));
+	addPart: (ZnMimePart fieldName: 'lvl2' value: button1 state);
+	post.
+'D:\testfile.txt' asFileReference
+	writeStreamDo: [ :arg1 | 
+		arg1
+			<<
+				(button1 state
+					ifTrue: [ 'easy' ]
+					ifFalse: [ button2 state
+							ifTrue: [ 'normal' ]
+							ifFalse: [ 'hard' ] ]) ].
+(Delay forSeconds: 1) wait.
+self window close ] in SimulationDataSetterUI>>initializePresenters in Block: [ | tmp6 tmp7 |...
+SpButtonPresenter>>performAction
+SpMorphicButtonAdapter>>action
+PluggableButtonMorph>>performAction:
+[ :arg3 | 
+(arg3 containsPoint: arg1 cursorPoint)
+	ifTrue: [ arg3 enabled
+			ifTrue: [ arg3 performAction: arg1 ] ] ] in PluggableButtonMorph>>mouseUp: in Block: [ :arg3 | ...
+Array(SequenceableCollection)>>do:
+PluggableButtonMorph>>mouseUp:
+PluggableButtonMorph(Morph)>>handleMouseUp:
+MouseButtonEvent>>sentTo:
+PluggableButtonMorph(Morph)>>handleEvent:
+PluggableButtonMorph(Morph)>>handleFocusEvent:
+[ ActiveHand := self.
+ActiveEvent := arg1.
+tmp3 := arg2
+	handleFocusEvent: (arg1 transformedBy: (arg2 transformedFrom: self)) ] in HandMorph>>sendFocusEvent:to:clear: in Block: [ ActiveHand := self....
+BlockClosure>>on:do:
+WorldMorph>>becomeActiveDuring:
+HandMorph>>sendFocusEvent:to:clear:
+HandMorph>>sendEvent:focus:clear:
+HandMorph>>sendMouseEvent:
+HandMorph>>handleEvent:
+HandMorph>>processEventsFromQueue:
+HandMorph>>processEvents
+[ :arg2 | 
+self activeHand: arg2.
+arg2 processEvents.
+self activeHand: nil ] in WorldState>>doOneCycleNowFor: in Block: [ :arg2 | ...
+Array(SequenceableCollection)>>do:
+WorldState>>handsDo:
+[0m[31mError: Instances of True are not indexable
+[0mTrue(Object)>>error:
+True(Object)>>errorNotIndexable
+True(Object)>>size
+ZnByteArrayEntity class>>bytes:
+ZnEntity class>>bytes:
+ZnEntity class>>with:
+ZnMimePart class>>fieldName:value:
+[ | tmp6 tmp7 |
+tmp6 := ZnClient new.
+tmp7 := (button1 state
+	ifTrue: [ 'easy' ]
+	ifFalse: [ button2 state
+			ifTrue: [ 'normal' ]
+			ifFalse: [ 'hard' ] ]) asString.
+Transcript show: tmp7.
+tmp6
+	url: 'http://localhost:8080/setGlobals';
+	timeout: 1000;
+	addPart:
+		(ZnMimePart
+			fieldName: 'search-field'
+			value:
+				button2 label asString , ' ' , button2 label asString , ' '
+					, numberOfGoods text asString);
+	addPart: (ZnMimePart fieldName: 'number-of-goods' value: numberOfGoods text);
+	addPart:
+		(ZnMimePart
+			fieldName: 'number-of-food-sources'
+			value: numberOfFoodSources text);
+	addPart: (ZnMimePart fieldName: 'number-of-bads' value: numberOfBads text);
+	addPart: (ZnMimePart fieldName: 'simulator-lvl' value: tmp7);
+	addPart:
+		(ZnMimePart
+			fieldName: 'lvl'
+			value:
+				(button1 state
+					ifTrue: [ 'easy' ]
+					ifFalse: [ button2 state
+							ifTrue: [ 'normal' ]
+							ifFalse: [ 'hard' ] ]));
+	addPart: (ZnMimePart fieldName: 'lvl2' value: button1 state);
+	post.
+'D:\testfile.txt' asFileReference
+	writeStreamDo: [ :arg1 | 
+		arg1
+			<<
+				(button1 state
+					ifTrue: [ 'easy' ]
+					ifFalse: [ button2 state
+							ifTrue: [ 'normal' ]
+							ifFalse: [ 'hard' ] ]) ].
+(Delay forSeconds: 1) wait.
+self window close ] in SimulationDataSetterUI>>initializePresenters in Block: [ | tmp6 tmp7 |...
+SpButtonPresenter>>performAction
+SpMorphicButtonAdapter>>action
+PluggableButtonMorph>>performAction:
+[ :arg3 | 
+(arg3 containsPoint: arg1 cursorPoint)
+	ifTrue: [ arg3 enabled
+			ifTrue: [ arg3 performAction: arg1 ] ] ] in PluggableButtonMorph>>mouseUp: in Block: [ :arg3 | ...
+Array(SequenceableCollection)>>do:
+PluggableButtonMorph>>mouseUp:
+PluggableButtonMorph(Morph)>>handleMouseUp:
+MouseButtonEvent>>sentTo:
+PluggableButtonMorph(Morph)>>handleEvent:
+PluggableButtonMorph(Morph)>>handleFocusEvent:
+[ ActiveHand := self.
+ActiveEvent := arg1.
+tmp3 := arg2
+	handleFocusEvent: (arg1 transformedBy: (arg2 transformedFrom: self)) ] in HandMorph>>sendFocusEvent:to:clear: in Block: [ ActiveHand := self....
+BlockClosure>>on:do:
+WorldMorph>>becomeActiveDuring:
+HandMorph>>sendFocusEvent:to:clear:
+HandMorph>>sendEvent:focus:clear:
+HandMorph>>sendMouseEvent:
+HandMorph>>handleEvent:
+HandMorph>>processEventsFromQueue:
+HandMorph>>processEvents
+[ :arg2 | 
+self activeHand: arg2.
+arg2 processEvents.
+self activeHand: nil ] in WorldState>>doOneCycleNowFor: in Block: [ :arg2 | ...
+Array(SequenceableCollection)>>do:
+WorldState>>handsDo:
+[0m[31mError: Instances of True are not indexable
+[0mTrue(Object)>>error:
+True(Object)>>errorNotIndexable
+True(Object)>>size
+ZnByteArrayEntity class>>bytes:
+ZnEntity class>>bytes:
+ZnEntity class>>with:
+ZnMimePart class>>fieldName:value:
+[ | tmp6 tmp7 |
+tmp6 := ZnClient new.
+tmp7 := (button1 state
+	ifTrue: [ 'easy' ]
+	ifFalse: [ button2 state
+			ifTrue: [ 'normal' ]
+			ifFalse: [ 'hard' ] ]) asString.
+Transcript show: tmp7.
+tmp6
+	url: 'http://localhost:8080/setGlobals';
+	timeout: 1000;
+	addPart:
+		(ZnMimePart
+			fieldName: 'search-field'
+			value:
+				button2 label asString , ' ' , button2 label asString , ' '
+					, numberOfGoods text asString);
+	addPart: (ZnMimePart fieldName: 'number-of-goods' value: numberOfGoods text);
+	addPart:
+		(ZnMimePart
+			fieldName: 'number-of-food-sources'
+			value: numberOfFoodSources text);
+	addPart: (ZnMimePart fieldName: 'number-of-bads' value: numberOfBads text);
+	addPart: (ZnMimePart fieldName: 'simulator-lvl' value: tmp7);
+	addPart:
+		(ZnMimePart
+			fieldName: 'lvl'
+			value:
+				(button1 state
+					ifTrue: [ 'easy' ]
+					ifFalse: [ button2 state
+							ifTrue: [ 'normal' ]
+							ifFalse: [ 'hard' ] ]));
+	addPart: (ZnMimePart fieldName: 'lvl2' value: button1 state);
+	post.
+'D:\testfile.txt' asFileReference
+	writeStreamDo: [ :arg1 | 
+		arg1
+			<<
+				(button1 state
+					ifTrue: [ 'easy' ]
+					ifFalse: [ button2 state
+							ifTrue: [ 'normal' ]
+							ifFalse: [ 'hard' ] ]) ].
+(Delay forSeconds: 1) wait.
+self window close ] in SimulationDataSetterUI>>initializePresenters in Block: [ | tmp6 tmp7 |...
+SpButtonPresenter>>performAction
+SpMorphicButtonAdapter>>action
+PluggableButtonMorph>>performAction:
+[ :arg3 | 
+(arg3 containsPoint: arg1 cursorPoint)
+	ifTrue: [ arg3 enabled
+			ifTrue: [ arg3 performAction: arg1 ] ] ] in PluggableButtonMorph>>mouseUp: in Block: [ :arg3 | ...
+Array(SequenceableCollection)>>do:
+PluggableButtonMorph>>mouseUp:
+PluggableButtonMorph(Morph)>>handleMouseUp:
+MouseButtonEvent>>sentTo:
+PluggableButtonMorph(Morph)>>handleEvent:
+PluggableButtonMorph(Morph)>>handleFocusEvent:
+[ ActiveHand := self.
+ActiveEvent := arg1.
+tmp3 := arg2
+	handleFocusEvent: (arg1 transformedBy: (arg2 transformedFrom: self)) ] in HandMorph>>sendFocusEvent:to:clear: in Block: [ ActiveHand := self....
+BlockClosure>>on:do:
+WorldMorph>>becomeActiveDuring:
+HandMorph>>sendFocusEvent:to:clear:
+HandMorph>>sendEvent:focus:clear:
+HandMorph>>sendMouseEvent:
+HandMorph>>handleEvent:
+HandMorph>>processEventsFromQueue:
+HandMorph>>processEvents
+[ :arg2 | 
+self activeHand: arg2.
+arg2 processEvents.
+self activeHand: nil ] in WorldState>>doOneCycleNowFor: in Block: [ :arg2 | ...
+Array(SequenceableCollection)>>do:
+WorldState>>handsDo:
+[0m[31mConnectionTimedOut: Cannot connect to 127.0.0.1:8080
+[0m[ ConnectionTimedOut
+	signal:
+		'Cannot connect to ' , (NetNameResolver stringFromAddress: arg1) , ':'
+			, arg2 asString ] in Socket>>connectTo:port:waitForConnectionFor: in Block: [ ConnectionTimedOut...
+Socket>>waitForConnectionFor:ifTimedOut:
+Socket>>connectTo:port:waitForConnectionFor:
+ZdcSocketStream(ZdcAbstractSocketStream)>>socketConnectTo:port:
+ZdcSocketStream(ZdcSimpleSocketStream)>>connectTo:port:
+ZdcSocketStream class(ZdcSimpleSocketStream class)>>openConnectionToHost:port:timeout:
+ZnNetworkingUtils>>socketStreamToUrlDirectly:
+ZnNetworkingUtils>>socketStreamToUrl:
+ZnNetworkingUtils class>>socketStreamToUrl:
+ZnClient>>newConnectionTo:
+ZnClient>>getConnectionAndExecute
+ZnClient>>executeWithRedirectsRemaining:
+[ self executeWithRedirectsRemaining: self maxNumberOfRedirects ] in ZnClient>>executeWithRetriesRemaining: in Block: [ self executeWithRedirectsRemaining: self maxNumb...etc...
+BlockClosure>>on:do:
+ZnClient>>executeWithRetriesRemaining:
+[ self executeWithRetriesRemaining: self numberOfRetries ] in [ [ self executeWithRetriesRemaining: self numberOfRetries ]
+	on: Error
+	do: self ifFailBlock ] in ZnClient>>executeWithTimeout in Block: [ self executeWithRetriesRemaining: self numberOfR...etc...
+BlockClosure>>on:do:
+[ [ self executeWithRetriesRemaining: self numberOfRetries ]
+	on: Error
+	do: self ifFailBlock ] in ZnClient>>executeWithTimeout in Block: [ [ self executeWithRetriesRemaining: self numberO...etc...
+[ ^ arg1 value ] in ZnClient>>withTimeoutDo: in Block: [ ^ arg1 value ]
+[ tmp1 psValueAt: index put: arg1.
+arg2 value ] in ZnConnectionTimeout(DynamicVariable)>>value:during: in Block: [ tmp1 psValueAt: index put: arg1....
+BlockClosure>>ensure:
+ZnConnectionTimeout(DynamicVariable)>>value:during:
+ZnConnectionTimeout class(DynamicVariable class)>>value:during:
+ZnClient>>withTimeoutDo:
+ZnClient>>executeWithTimeout
+[ tmp2 := self executeWithTimeout ] in ZnClient>>execute in Block: [ tmp2 := self executeWithTimeout ]
+[ ^ arg1 value ] in ZnClient>>withProgressDo: in Block: [ ^ arg1 value ]
+[ tmp1 psValueAt: index put: arg1.
+arg2 value ] in ZnSignalProgress(DynamicVariable)>>value:during: in Block: [ tmp1 psValueAt: index put: arg1....
+BlockClosure>>ensure:
+ZnSignalProgress(DynamicVariable)>>value:during:
+[0mxNumberOfRedirects ] in ZnClient>>executeWithRetriesRemaining: in Block: [ self executeWithRedirectsRemaining: self maxNumb...etc...
+BlockClosure>>on:do:
+ZnClient>>executeWithRetriesRemaining:
+[ self executeWithRetriesRemaining: self numberOfRetries ] in [ [ self executeWithRetriesRemaining: self numberOfRetries ]
+	on: Error
+	do: self ifFailBlock ] in ZnClient>>executeWithTimeout in Block: [ self executeWithRetriesRemaining: self numberOfR...etc...
+BlockClosure>>on:do:
+[0m[31mInstance of ZnMimePart class did not understand #formAt:put:
+[0mZnMimePart class(Object)>>doesNotUnderstand: #formAt:put:
+[ | tmp7 tmp9 |
+tmp7 := ZnClient new.
+tmp7 url: 'http://localhost:8080/'.
+tmp9 := ZnMimePart.
+tmp9 formAt: 'username' put: 'john.doe@acme.com'.
+tmp7
+	addPart:
+		(tmp9
+			formAt: 'search-field'
+			put:
+				button2 label asString , ' ' , button2 label asString , ' '
+					, numberOfGoods text asString);
+	post.
+'D:\testfile.txt' asFileReference
+	writeStreamDo: [ :arg1 | 
+		arg1
+			<<
+				(button2 label asString , ' ' , button2 label asString , ' '
+					, numberOfGoods text asString) ].
+(Delay forSeconds: 2) wait.
+self window close ] in SimulationDataSetterUI>>initializePresenters in Block: [ | tmp7 tmp9 |...
+SpButtonPresenter>>performAction
+SpMorphicButtonAdapter>>action
+PluggableButtonMorph>>performAction:
+[ :arg3 | 
+(arg3 containsPoint: arg1 cursorPoint)
+	ifTrue: [ arg3 enabled
+			ifTrue: [ arg3 performAction: arg1 ] ] ] in PluggableButtonMorph>>mouseUp: in Block: [ :arg3 | ...
+Array(SequenceableCollection)>>do:
+PluggableButtonMorph>>mouseUp:
+PluggableButtonMorph(Morph)>>handleMouseUp:
+MouseButtonEvent>>sentTo:
+PluggableButtonMorph(Morph)>>handleEvent:
+PluggableButtonMorph(Morph)>>handleFocusEvent:
+[ ActiveHand := self.
+ActiveEvent := arg1.
+tmp3 := arg2
+	handleFocusEvent: (arg1 transformedBy: (arg2 transformedFrom: self)) ] in HandMorph>>sendFocusEvent:to:clear: in Block: [ ActiveHand := self....
+BlockClosure>>on:do:
+WorldMorph>>becomeActiveDuring:
+HandMorph>>sendFocusEvent:to:clear:
+HandMorph>>sendEvent:focus:clear:
+HandMorph>>sendMouseEvent:
+HandMorph>>handleEvent:
+HandMorph>>processEventsFromQueue:
+HandMorph>>processEvents
+[ :arg2 | 
+self activeHand: arg2.
+arg2 processEvents.
+self activeHand: nil ] in WorldState>>doOneCycleNowFor: in Block: [ :arg2 | ...
+Array(SequenceableCollection)>>do:
+WorldState>>handsDo:
+WorldState>>doOneCycleNowFor:
+WorldState>>doOneCycleFor:
+WorldMorph>>doOneCycle
+WorldMorph class>>doOneCycle
+[ [ WorldMorph doOneCycle.
+Processor yield.
+false ] whileFalse: [  ] ] in MorphicUIManager>>spawnNewProcess in Block: [ [ WorldMorph doOneCycle....
+[ self value.
+Processor terminateActive ] in BlockClosure>>newProcess in Block: [ self value....
+[0m 1 to: size - 1 do: [ :i | (v elements at: size - i) remove ].
+		v elements atRandom remove ].
+Transcript clear.
+Transcript
+	show: (response at: #foodSources) size;
+	cr.
+(response at: #foodSources)
+	do: [ :foodSource | 
+		food := (RTEllipse new
+			size: 30;
+			color: (Color green alpha: 0.4)) element.
+		food translateTo: 1 atRandom @ 1 atRandom.
+		v add: food.
+		Transcript
+			show: (foodSource at: #Occupied);
+			cr.
+		(foodSource at: #Occupied) = 0
+			ifTrue: [ stepping addNode: food ].
+		(foodSource at: #Occupied) = 1
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				edge := RTLine edgeFrom: el to: food.
+				v add: edge.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge ].
+		(foodSource at: #Occupied) = 2
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 2) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el2 := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el2 translateTo: 5 atRandom @ 5 atRandom.
+				v add: el2.
+				edge := RTLine edgeFrom: el to: food.
+				edge2 := RTLine edgeFrom: el2 to: food.
+				v add: edge.
+				v add: edge2.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge;
+					addNode: el2;
+					addEdge: edge2 ] ].
+Transcript show: v elements size.
+v signalUpdate ] in UndefinedObject>>DoIt in Block: [ | el edge food el2 edge2 response |...
+[ :arg5 | arg2 value ] in TRCanvas>>addMenu:callback: in Block: [ :arg5 | arg2 value ]
+BlockClosure>>cull:
+BlockClosure>>cull:cull:
+[ action cull: arg1 cull: announcer ] in AnnouncementSubscription>>deliver: in Block: [ action cull: arg1 cull: announcer ]
+BlockClosure>>on:do:
+[ Processor terminateActive ] in [ :arg3 | 
+| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+tmp2 := thisContext.
+tmp6 := tmp2 home.
+[ tmp2 sender == tmp6 ]
+	whileFalse: [ tmp2 := tmp2 sender.
+		tmp2 ifNil: [ ^ arg2 cull: arg3 ] ].
+tmp5 := [ Processor terminateActive ] asContext.
+tmp2 privSender: tmp5.
+tmp4 := [ arg2 cull: arg3 ] asContext.
+tmp4 privSender: thisContext sender.
+(Process forContext: tmp4 priority: Processor activePriority) resume.
+thisContext privSender: tmp6 ] in BlockClosure>>on:fork: in Block: [ Processor terminateActive ]
+[0m[31mError: only integers should be used as indices
+[0mArray(Object)>>error:
+Array(Object)>>errorNonIntegerIndex
+Array(Object)>>at:
+[ | el edge food el2 edge2 response |
+response := ZnClient new
+	url: 'http://localhost:8080/toTheEnd';
+	enforceHttpSuccess: true;
+	accept: ZnMimeType applicationJson;
+	contentReader: [ :asd | NeoJSONReader fromString: asd contents ];
+	get.
+size := v elements size.
+size ~= 0
+	ifTrue: [ 1 to: size - 1 do: [ :i | (v elements at: size - i) remove ].
+		v elements atRandom remove ].
+Transcript clear.
+Transcript
+	show: (response at: #foodSources) size;
+	cr.
+(response at: #foodSources)
+	do: [ :foodSource | 
+		food := (RTEllipse new
+			size: 30;
+			color: (Color green alpha: 0.4)) element.
+		food translateTo: 1 atRandom @ 1 atRandom.
+		v add: food.
+		Transcript
+			show: (foodSource at: #Occupied);
+			cr.
+		(foodSource at: #Occupied) = 0
+			ifTrue: [ stepping addNode: food ].
+		(foodSource at: #Occupied) = 1
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				edge := RTLine edgeFrom: el to: food.
+				v add: edge.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge ].
+		(foodSource at: #Occupied) = 2
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 2) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el2 := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el2 translateTo: 5 atRandom @ 5 atRandom.
+				v add: el2.
+				edge := RTLine edgeFrom: el to: food.
+				edge2 := RTLine edgeFrom: el2 to: food.
+				v add: edge.
+				v add: edge2.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge;
+					addNode: el2;
+					addEdge: edge2 ] ].
+Transcript show: v elements size.
+v signalUpdate ] in UndefinedObject>>DoIt in Block: [ | el edge food el2 edge2 response |...
+[ :arg5 | arg2 value ] in TRCanvas>>addMenu:callback: in Block: [ :arg5 | arg2 value ]
+BlockClosure>>cull:
+BlockClosure>>cull:cull:
+[ action cull: arg1 cull: announcer ] in AnnouncementSubscription>>deliver: in Block: [ action cull: arg1 cull: announcer ]
+BlockClosure>>on:do:
+[ Processor terminateActive ] in [ :arg3 | 
+| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+tmp2 := thisContext.
+tmp6 := tmp2 home.
+[ tmp2 sender == tmp6 ]
+	whileFalse: [ tmp2 := tmp2 sender.
+		tmp2 ifNil: [ ^ arg2 cull: arg3 ] ].
+tmp5 := [ Processor terminateActive ] asContext.
+tmp2 privSender: tmp5.
+tmp4 := [ arg2 cull: arg3 ] asContext.
+tmp4 privSender: thisContext sender.
+(Process forContext: tmp4 priority: Processor activePriority) resume.
+thisContext privSender: tmp6 ] in BlockClosure>>on:fork: in Block: [ Processor terminateActive ]
+[0m[31mError: only integers should be used as indices
+[0mArray(Object)>>error:
+Array(Object)>>errorNonIntegerIndex
+Array(Object)>>at:
+[ | el edge food el2 edge2 response |
+response := ZnClient new
+	url: 'http://localhost:8080/toTheEnd';
+	enforceHttpSuccess: true;
+	accept: ZnMimeType applicationJson;
+	contentReader: [ :reader | NeoJSONReader fromString: reader contents ];
+	get.
+size := v elements size.
+size ~= 0
+	ifTrue: [ 1 to: size - 1 do: [ :i | (v elements at: size - i) remove ].
+		v elements atRandom remove ].
+Transcript clear.
+Transcript
+	show: (response at: #foodSources) size;
+	cr.
+(response at: #foodSources)
+	do: [ :foodSource | 
+		food := (RTEllipse new
+			size: 30;
+			color: (Color green alpha: 0.4)) element.
+		food translateTo: 1 atRandom @ 1 atRandom.
+		v add: food.
+		Transcript
+			show: (foodSource at: #Occupied);
+			cr.
+		(foodSource at: #Occupied) = 0
+			ifTrue: [ stepping addNode: food ].
+		(foodSource at: #Occupied) = 1
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				edge := RTLine edgeFrom: el to: food.
+				v add: edge.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge ].
+		(foodSource at: #Occupied) = 2
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 2) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el2 := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el2 translateTo: 5 atRandom @ 5 atRandom.
+				v add: el2.
+				edge := RTLine edgeFrom: el to: food.
+				edge2 := RTLine edgeFrom: el2 to: food.
+				v add: edge.
+				v add: edge2.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge;
+					addNode: el2;
+					addEdge: edge2 ] ].
+Transcript show: v elements size.
+v signalUpdate ] in UndefinedObject>>DoIt in Block: [ | el edge food el2 edge2 response |...
+[ :arg5 | arg2 value ] in TRCanvas>>addMenu:callback: in Block: [ :arg5 | arg2 value ]
+BlockClosure>>cull:
+BlockClosure>>cull:cull:
+[ action cull: arg1 cull: announcer ] in AnnouncementSubscription>>deliver: in Block: [ action cull: arg1 cull: announcer ]
+BlockClosure>>on:do:
+[ Processor terminateActive ] in [ :arg3 | 
+| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+tmp2 := thisContext.
+tmp6 := tmp2 home.
+[ tmp2 sender == tmp6 ]
+	whileFalse: [ tmp2 := tmp2 sender.
+		tmp2 ifNil: [ ^ arg2 cull: arg3 ] ].
+tmp5 := [ Processor terminateActive ] asContext.
+tmp2 privSender: tmp5.
+tmp4 := [ arg2 cull: arg3 ] asContext.
+tmp4 privSender: thisContext sender.
+(Process forContext: tmp4 priority: Processor activePriority) resume.
+thisContext privSender: tmp6 ] in BlockClosure>>on:fork: in Block: [ Processor terminateActive ]
+[0m[31mError: only integers should be used as indices
+[0mArray(Object)>>error:
+Array(Object)>>errorNonIntegerIndex
+Array(Object)>>at:
+[ | el edge food el2 edge2 response |
+response := ZnClient new
+	url: 'http://localhost:8080/toTheEnd';
+	enforceHttpSuccess: true;
+	accept: ZnMimeType applicationJson;
+	timeout: 5;
+	contentReader: [ :reader | NeoJSONReader fromString: reader contents ];
+	get.
+size := v elements size.
+size ~= 0
+	ifTrue: [ 1 to: size - 1 do: [ :i | (v elements at: size - i) remove ].
+		v elements atRandom remove ].
+Transcript clear.
+Transcript
+	show: (response at: #foodSources) size;
+	cr.
+(response at: #foodSources)
+	do: [ :foodSource | 
+		food := (RTEllipse new
+			size: 30;
+			color: (Color green alpha: 0.4)) element.
+		food translateTo: 1 atRandom @ 1 atRandom.
+		v add: food.
+		Transcript
+			show: (foodSource at: #Occupied);
+			cr.
+		(foodSource at: #Occupied) = 0
+			ifTrue: [ stepping addNode: food ].
+		(foodSource at: #Occupied) = 1
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				edge := RTLine edgeFrom: el to: food.
+				v add: edge.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge ].
+		(foodSource at: #Occupied) = 2
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 2) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el2 := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el2 translateTo: 5 atRandom @ 5 atRandom.
+				v add: el2.
+				edge := RTLine edgeFrom: el to: food.
+				edge2 := RTLine edgeFrom: el2 to: food.
+				v add: edge.
+				v add: edge2.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge;
+					addNode: el2;
+					addEdge: edge2 ] ].
+Transcript show: v elements size.
+v signalUpdate ] in UndefinedObject>>DoIt in Block: [ | el edge food el2 edge2 response |...
+[ :arg5 | arg2 value ] in TRCanvas>>addMenu:callback: in Block: [ :arg5 | arg2 value ]
+BlockClosure>>cull:
+BlockClosure>>cull:cull:
+[ action cull: arg1 cull: announcer ] in AnnouncementSubscription>>deliver: in Block: [ action cull: arg1 cull: announcer ]
+BlockClosure>>on:do:
+[ Processor terminateActive ] in [ :arg3 | 
+| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+tmp2 := thisContext.
+tmp6 := tmp2 home.
+[ tmp2 sender == tmp6 ]
+	whileFalse: [ tmp2 := tmp2 sender.
+		tmp2 ifNil: [ ^ arg2 cull: arg3 ] ].
+tmp5 := [ Processor terminateActive ] asContext.
+tmp2 privSender: tmp5.
+tmp4 := [ arg2 cull: arg3 ] asContext.
+tmp4 privSender: thisContext sender.
+(Process forContext: tmp4 priority: Processor activePriority) resume.
+thisContext privSender: tmp6 ] in BlockClosure>>on:fork: in Block: [ Processor terminateActive ]
+[0m[31mError: only integers should be used as indices
+[0mArray(Object)>>error:
+Array(Object)>>errorNonIntegerIndex
+Array(Object)>>at:
+[ | el edge food el2 edge2 response |
+response := ZnClient new
+	url: 'http://localhost:8080/toTheEnd';
+	enforceHttpSuccess: true;
+	accept: ZnMimeType applicationJson;
+	timeout: 1;
+	contentReader: [ :reader | NeoJSONReader fromString: reader contents ];
+	get.
+size := v elements size.
+size ~= 0
+	ifTrue: [ 1 to: size - 1 do: [ :i | (v elements at: size - i) remove ].
+		v elements atRandom remove ].
+Transcript clear.
+Transcript
+	show: (response at: #foodSources) size;
+	cr.
+(response at: #foodSources)
+	do: [ :foodSource | 
+		food := (RTEllipse new
+			size: 30;
+			color: (Color green alpha: 0.4)) element.
+		food translateTo: 1 atRandom @ 1 atRandom.
+		v add: food.
+		Transcript
+			show: (foodSource at: #Occupied);
+			cr.
+		(foodSource at: #Occupied) = 0
+			ifTrue: [ stepping addNode: food ].
+		(foodSource at: #Occupied) = 1
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				edge := RTLine edgeFrom: el to: food.
+				v add: edge.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge ].
+		(foodSource at: #Occupied) = 2
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 2) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el2 := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el2 translateTo: 5 atRandom @ 5 atRandom.
+				v add: el2.
+				edge := RTLine edgeFrom: el to: food.
+				edge2 := RTLine edgeFrom: el2 to: food.
+				v add: edge.
+				v add: edge2.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge;
+					addNode: el2;
+					addEdge: edge2 ] ].
+Transcript show: v elements size.
+v signalUpdate ] in UndefinedObject>>DoIt in Block: [ | el edge food el2 edge2 response |...
+[ :arg5 | arg2 value ] in TRCanvas>>addMenu:callback: in Block: [ :arg5 | arg2 value ]
+BlockClosure>>cull:
+BlockClosure>>cull:cull:
+[ action cull: arg1 cull: announcer ] in AnnouncementSubscription>>deliver: in Block: [ action cull: arg1 cull: announcer ]
+BlockClosure>>on:do:
+[ Processor terminateActive ] in [ :arg3 | 
+| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+tmp2 := thisContext.
+tmp6 := tmp2 home.
+[ tmp2 sender == tmp6 ]
+	whileFalse: [ tmp2 := tmp2 sender.
+		tmp2 ifNil: [ ^ arg2 cull: arg3 ] ].
+tmp5 := [ Processor terminateActive ] asContext.
+tmp2 privSender: tmp5.
+tmp4 := [ arg2 cull: arg3 ] asContext.
+tmp4 privSender: thisContext sender.
+(Process forContext: tmp4 priority: Processor activePriority) resume.
+thisContext privSender: tmp6 ] in BlockClosure>>on:fork: in Block: [ Processor terminateActive ]
+[0m[31mError: only integers should be used as indices
+[0mArray(Object)>>error:
+Array(Object)>>errorNonIntegerIndex
+Array(Object)>>at:
+[ | el edge food el2 edge2 response |
+response := ZnClient new
+	url: 'http://localhost:8080/toTheEnd';
+	enforceHttpSuccess: true;
+	accept: ZnMimeType applicationJson;
+	timeout: 10000;
+	contentReader: [ :reader | NeoJSONReader fromString: reader contents ];
+	get.
+size := v elements size.
+size ~= 0
+	ifTrue: [ 1 to: size - 1 do: [ :i | (v elements at: size - i) remove ].
+		v elements atRandom remove ].
+Transcript clear.
+Transcript
+	show: (response at: #foodSources) size;
+	cr.
+(response at: #foodSources)
+	do: [ :foodSource | 
+		food := (RTEllipse new
+			size: 30;
+			color: (Color green alpha: 0.4)) element.
+		food translateTo: 1 atRandom @ 1 atRandom.
+		v add: food.
+		Transcript
+			show: (foodSource at: #Occupied);
+			cr.
+		(foodSource at: #Occupied) = 0
+			ifTrue: [ stepping addNode: food ].
+		(foodSource at: #Occupied) = 1
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				edge := RTLine edgeFrom: el to: food.
+				v add: edge.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge ].
+		(foodSource at: #Occupied) = 2
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 2) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el2 := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el2 translateTo: 5 atRandom @ 5 atRandom.
+				v add: el2.
+				edge := RTLine edgeFrom: el to: food.
+				edge2 := RTLine edgeFrom: el2 to: food.
+				v add: edge.
+				v add: edge2.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge;
+					addNode: el2;
+					addEdge: edge2 ] ].
+Transcript show: v elements size.
+v signalUpdate ] in UndefinedObject>>DoIt in Block: [ | el edge food el2 edge2 response |...
+[ :arg5 | arg2 value ] in TRCanvas>>addMenu:callback: in Block: [ :arg5 | arg2 value ]
+BlockClosure>>cull:
+BlockClosure>>cull:cull:
+[ action cull: arg1 cull: announcer ] in AnnouncementSubscription>>deliver: in Block: [ action cull: arg1 cull: announcer ]
+BlockClosure>>on:do:
+[ Processor terminateActive ] in [ :arg3 | 
+| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+tmp2 := thisContext.
+tmp6 := tmp2 home.
+[ tmp2 sender == tmp6 ]
+	whileFalse: [ tmp2 := tmp2 sender.
+		tmp2 ifNil: [ ^ arg2 cull: arg3 ] ].
+tmp5 := [ Processor terminateActive ] asContext.
+tmp2 privSender: tmp5.
+tmp4 := [ arg2 cull: arg3 ] asContext.
+tmp4 privSender: thisContext sender.
+(Process forContext: tmp4 priority: Processor activePriority) resume.
+thisContext privSender: tmp6 ] in BlockClosure>>on:fork: in Block: [ Processor terminateActive ]
+[0m[31mWarning
+[0mBlockClosure>>ensure:
+RecursionStopper>>stopMethod:during:
+RecursionStopper class>>during:
+Deprecation>>transform
+SpListPresenter(Object)>>deprecated:transformWith:
+SpListPresenter>>displayBlock:
+EyeCollectionInspector(EyeInspector)>>updateList
+EyeCollectionInspector(EyeInspector)>>objectChanged
+[ self objectChanged ] in EyeCollectionInspector(EyeAbstractInspector)>>initializePresenter in Block: [ self objectChanged ]
+BlockClosure>>cull:
+BlockClosure>>cull:cull:
+[ :arg2 | arg2 cull: self value cull: arg1 ] in SpValueHolder>>valueChanged: in Block: [ :arg2 | arg2 cull: self value cull: arg1 ]
+OrderedCollection>>do:
+SpValueHolder>>valueChanged:
+[ | tmp1 |
+tmp1 := value.
+value := arg1.
+self valueChanged: tmp1 ] in SpValueHolder>>value: in Block: [ | tmp1 |...
+BlockClosure>>ensure:
+SpValueHolder>>value:
+EyeCollectionInspector(EyeAbstractInspector)>>object:
+EyeCollectionInspector(EyeInspector)>>inspect:
+EyeInspector class>>inspector:
+EyeInspector class>>inspect:
+Array(Object)>>basicInspect
+[ :arg7 | arg7 basicInspect ] in [ :arg6 | arg6 highlightEvaluateAndDo: [ :arg7 | arg7 basicInspect ] ] in GLMPharoScriptPresentation(GLMRubricSmalltalkCodePresentation)>>executionSelectionActions in Block: [ :arg7 | arg7 basicInspect ]
+[ :arg2 | arg1 value: arg2 ] in RubSmalltalkEditor>>highlightEvaluateAndDo: in Block: [ :arg2 | arg1 value: arg2 ]
+RubSmalltalkEditor>>evaluate:andDo:
+RubSmalltalkEditor>>highlightEvaluateAndDo:
+[ textMorph textArea editor highlightEvaluateAndDo: arg1 action.
+textMorph shoutStyler style: textMorph text ] in [ textMorph textArea
+	handleEdit: [ textMorph textArea editor highlightEvaluateAndDo: arg1 action.
+		textMorph shoutStyler style: textMorph text ] ] in GLMMorphicPharoScriptRenderer(GLMMorphicPharoCodeRenderer)>>actOnHighlightAndEvaluate: in Block: [ textMorph textArea editor highlightEvaluateAndDo...etc...
+RubEditingArea(RubAbstractTextArea)>>handleEdit:
+[ textMorph textArea
+	handleEdit: [ textMorph textArea editor highlightEvaluateAndDo: arg1 action.
+		textMorph shoutStyler style: textMorph text ] ] in GLMMorphicPharoScriptRenderer(GLMMorphicPharoCodeRenderer)>>actOnHighlightAndEvaluate: in Block: [ textMorph textArea...
+WorldState>>runStepMethodsIn:
+[0m[31mInstance of SmallInteger did not understand #,
+[0mSmallInteger(Object)>>doesNotUnderstand: #,
+[ | el edge food el2 edge2 response |
+response := ZnClient new
+	url: 'http://localhost:8080/toTheEnd';
+	enforceHttpSuccess: true;
+	accept: ZnMimeType applicationJson;
+	timeout: 1000;
+	contentReader: [ :reader | NeoJSONReader fromString: reader contents ];
+	get.
+size := v elements size.
+size ~= 0
+	ifTrue: [ 1 to: size - 1 do: [ :i | (v elements at: size - i) remove ].
+		v elements atRandom remove ].
+Transcript clear.
+Transcript show: 'Epoche: '.
+Transcript show: (response at: #currentEpoch) , '/'.
+Transcript
+	show: (response at: #finalEpoch);
+	cr.
+(response at: #foodSources)
+	do: [ :foodSource | 
+		food := (RTEllipse new
+			size: 30;
+			color: (Color green alpha: 0.4)) element.
+		food @ RTDraggable.
+		food translateTo: 1 atRandom @ 1 atRandom.
+		v add: food.
+		Transcript
+			show: (foodSource at: #Occupied);
+			cr.
+		(foodSource at: #Occupied) = 0
+			ifTrue: [ stepping addNode: food ].
+		(foodSource at: #Occupied) = 1
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el @ RTDraggable.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				edge := RTLine edgeFrom: el to: food.
+				v add: edge.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge ].
+		(foodSource at: #Occupied) = 2
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el @ RTDraggable.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 2) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el2 := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el2 @ RTDraggable.
+				el2 translateTo: 5 atRandom @ 5 atRandom.
+				v add: el2.
+				edge := RTLine edgeFrom: el to: food.
+				edge2 := RTLine edgeFrom: el2 to: food.
+				v add: edge.
+				v add: edge2.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge;
+					addNode: el2;
+					addEdge: edge2 ] ].
+Transcript show: v elements size.
+v signalUpdate ] in UndefinedObject>>DoIt in Block: [ | el edge food el2 edge2 response |...
+[ :arg5 | arg2 value ] in TRCanvas>>addMenu:callback: in Block: [ :arg5 | arg2 value ]
+BlockClosure>>cull:
+BlockClosure>>cull:cull:
+[ action cull: arg1 cull: announcer ] in AnnouncementSubscription>>deliver: in Block: [ action cull: arg1 cull: announcer ]
+BlockClosure>>on:do:
+[ Processor terminateActive ] in [ :arg3 | 
+| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+tmp2 := thisContext.
+tmp6 := tmp2 home.
+[ tmp2 sender == tmp6 ]
+	whileFalse: [ tmp2 := tmp2 sender.
+		tmp2 ifNil: [ ^ arg2 cull: arg3 ] ].
+tmp5 := [ Processor terminateActive ] asContext.
+tmp2 privSender: tmp5.
+tmp4 := [ arg2 cull: arg3 ] asContext.
+tmp4 privSender: thisContext sender.
+(Process forContext: tmp4 priority: Processor activePriority) resume.
+thisContext privSender: tmp6 ] in BlockClosure>>on:fork: in Block: [ Processor terminateActive ]
+[0m[31mInstance of SmallInteger did not understand #,
+[0mSmallInteger(Object)>>doesNotUnderstand: #,
+[ | el edge food el2 edge2 response |
+response := ZnClient new
+	url: 'http://localhost:8080/toTheEnd';
+	enforceHttpSuccess: true;
+	accept: ZnMimeType applicationJson;
+	timeout: 1000;
+	contentReader: [ :reader | NeoJSONReader fromString: reader contents ];
+	get.
+size := v elements size.
+size ~= 0
+	ifTrue: [ 1 to: size - 1 do: [ :i | (v elements at: size - i) remove ].
+		v elements atRandom remove ].
+Transcript clear.
+Transcript show: 'Epoche: '.
+Transcript show: (response at: #currentEpoch) , '/' asString.
+Transcript
+	show: (response at: #finalEpoch);
+	cr.
+(response at: #foodSources)
+	do: [ :foodSource | 
+		food := (RTEllipse new
+			size: 30;
+			color: (Color green alpha: 0.4)) element.
+		food @ RTDraggable.
+		food translateTo: 1 atRandom @ 1 atRandom.
+		v add: food.
+		Transcript
+			show: (foodSource at: #Occupied);
+			cr.
+		(foodSource at: #Occupied) = 0
+			ifTrue: [ stepping addNode: food ].
+		(foodSource at: #Occupied) = 1
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el @ RTDraggable.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				edge := RTLine edgeFrom: el to: food.
+				v add: edge.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge ].
+		(foodSource at: #Occupied) = 2
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el @ RTDraggable.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 2) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el2 := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el2 @ RTDraggable.
+				el2 translateTo: 5 atRandom @ 5 atRandom.
+				v add: el2.
+				edge := RTLine edgeFrom: el to: food.
+				edge2 := RTLine edgeFrom: el2 to: food.
+				v add: edge.
+				v add: edge2.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge;
+					addNode: el2;
+					addEdge: edge2 ] ].
+Transcript show: v elements size.
+v signalUpdate ] in UndefinedObject>>DoIt in Block: [ | el edge food el2 edge2 response |...
+[ :arg5 | arg2 value ] in TRCanvas>>addMenu:callback: in Block: [ :arg5 | arg2 value ]
+BlockClosure>>cull:
+BlockClosure>>cull:cull:
+[ action cull: arg1 cull: announcer ] in AnnouncementSubscription>>deliver: in Block: [ action cull: arg1 cull: announcer ]
+BlockClosure>>on:do:
+[ Processor terminateActive ] in [ :arg3 | 
+| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+tmp2 := thisContext.
+tmp6 := tmp2 home.
+[ tmp2 sender == tmp6 ]
+	whileFalse: [ tmp2 := tmp2 sender.
+		tmp2 ifNil: [ ^ arg2 cull: arg3 ] ].
+tmp5 := [ Processor terminateActive ] asContext.
+tmp2 privSender: tmp5.
+tmp4 := [ arg2 cull: arg3 ] asContext.
+tmp4 privSender: thisContext sender.
+(Process forContext: tmp4 priority: Processor activePriority) resume.
+thisContext privSender: tmp6 ] in BlockClosure>>on:fork: in Block: [ Processor terminateActive ]
+[0m[31mInstance of SmallInteger did not understand #,
+[0mSmallInteger(Object)>>doesNotUnderstand: #,
+[ | el edge food el2 edge2 response |
+response := ZnClient new
+	url: 'http://localhost:8080/toTheEnd';
+	enforceHttpSuccess: true;
+	accept: ZnMimeType applicationJson;
+	timeout: 1000;
+	contentReader: [ :reader | NeoJSONReader fromString: reader contents ];
+	get.
+size := v elements size.
+size ~= 0
+	ifTrue: [ 1 to: size - 1 do: [ :i | (v elements at: size - i) remove ].
+		v elements atRandom remove ].
+Transcript clear.
+Transcript show: 'Epoche: '.
+Transcript show: (response at: #currentEpoch) , ' od ' asString.
+Transcript
+	show: (response at: #finalEpoch);
+	cr.
+(response at: #foodSources)
+	do: [ :foodSource | 
+		food := (RTEllipse new
+			size: 30;
+			color: (Color green alpha: 0.4)) element.
+		food @ RTDraggable.
+		food translateTo: 1 atRandom @ 1 atRandom.
+		v add: food.
+		Transcript
+			show: (foodSource at: #Occupied);
+			cr.
+		(foodSource at: #Occupied) = 0
+			ifTrue: [ stepping addNode: food ].
+		(foodSource at: #Occupied) = 1
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el @ RTDraggable.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				edge := RTLine edgeFrom: el to: food.
+				v add: edge.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge ].
+		(foodSource at: #Occupied) = 2
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el @ RTDraggable.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 2) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el2 := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el2 @ RTDraggable.
+				el2 translateTo: 5 atRandom @ 5 atRandom.
+				v add: el2.
+				edge := RTLine edgeFrom: el to: food.
+				edge2 := RTLine edgeFrom: el2 to: food.
+				v add: edge.
+				v add: edge2.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge;
+					addNode: el2;
+					addEdge: edge2 ] ].
+Transcript show: v elements size.
+v signalUpdate ] in UndefinedObject>>DoIt in Block: [ | el edge food el2 edge2 response |...
+[ :arg5 | arg2 value ] in TRCanvas>>addMenu:callback: in Block: [ :arg5 | arg2 value ]
+BlockClosure>>cull:
+BlockClosure>>cull:cull:
+[ action cull: arg1 cull: announcer ] in AnnouncementSubscription>>deliver: in Block: [ action cull: arg1 cull: announcer ]
+BlockClosure>>on:do:
+[ Processor terminateActive ] in [ :arg3 | 
+| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+tmp2 := thisContext.
+tmp6 := tmp2 home.
+[ tmp2 sender == tmp6 ]
+	whileFalse: [ tmp2 := tmp2 sender.
+		tmp2 ifNil: [ ^ arg2 cull: arg3 ] ].
+tmp5 := [ Processor terminateActive ] asContext.
+tmp2 privSender: tmp5.
+tmp4 := [ arg2 cull: arg3 ] asContext.
+tmp4 privSender: thisContext sender.
+(Process forContext: tmp4 priority: Processor activePriority) resume.
+thisContext privSender: tmp6 ] in BlockClosure>>on:fork: in Block: [ Processor terminateActive ]
+[0m[31mInstance of SmallInteger did not understand #,
+[0mSmallInteger(Object)>>doesNotUnderstand: #,
+[ | el edge food el2 edge2 response |
+response := ZnClient new
+	url: 'http://localhost:8080/toTheEnd';
+	enforceHttpSuccess: true;
+	accept: ZnMimeType applicationJson;
+	timeout: 1000;
+	contentReader: [ :reader | NeoJSONReader fromString: reader contents ];
+	get.
+size := v elements size.
+size ~= 0
+	ifTrue: [ 1 to: size - 1 do: [ :i | (v elements at: size - i) remove ].
+		v elements atRandom remove ].
+Transcript clear.
+Transcript show: 'Epoche: '.
+Transcript show: (response at: #currentEpoch asString) , '/' asString.
+Transcript
+	show: (response at: #finalEpoch);
+	cr.
+(response at: #foodSources)
+	do: [ :foodSource | 
+		food := (RTEllipse new
+			size: 30;
+			color: (Color green alpha: 0.4)) element.
+		food @ RTDraggable.
+		food translateTo: 1 atRandom @ 1 atRandom.
+		v add: food.
+		Transcript
+			show: (foodSource at: #Occupied);
+			cr.
+		(foodSource at: #Occupied) = 0
+			ifTrue: [ stepping addNode: food ].
+		(foodSource at: #Occupied) = 1
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el @ RTDraggable.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				edge := RTLine edgeFrom: el to: food.
+				v add: edge.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge ].
+		(foodSource at: #Occupied) = 2
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el @ RTDraggable.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 2) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el2 := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el2 @ RTDraggable.
+				el2 translateTo: 5 atRandom @ 5 atRandom.
+				v add: el2.
+				edge := RTLine edgeFrom: el to: food.
+				edge2 := RTLine edgeFrom: el2 to: food.
+				v add: edge.
+				v add: edge2.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge;
+					addNode: el2;
+					addEdge: edge2 ] ].
+Transcript show: v elements size.
+v signalUpdate ] in UndefinedObject>>DoIt in Block: [ | el edge food el2 edge2 response |...
+[ :arg5 | arg2 value ] in TRCanvas>>addMenu:callback: in Block: [ :arg5 | arg2 value ]
+BlockClosure>>cull:
+BlockClosure>>cull:cull:
+[ action cull: arg1 cull: announcer ] in AnnouncementSubscription>>deliver: in Block: [ action cull: arg1 cull: announcer ]
+BlockClosure>>on:do:
+[ Processor terminateActive ] in [ :arg3 | 
+| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+tmp2 := thisContext.
+tmp6 := tmp2 home.
+[ tmp2 sender == tmp6 ]
+	whileFalse: [ tmp2 := tmp2 sender.
+		tmp2 ifNil: [ ^ arg2 cull: arg3 ] ].
+tmp5 := [ Processor terminateActive ] asContext.
+tmp2 privSender: tmp5.
+tmp4 := [ arg2 cull: arg3 ] asContext.
+tmp4 privSender: thisContext sender.
+(Process forContext: tmp4 priority: Processor activePriority) resume.
+thisContext privSender: tmp6 ] in BlockClosure>>on:fork: in Block: [ Processor terminateActive ]
+[0m[31mInstance of SmallInteger did not understand #,
+[0mSmallInteger(Object)>>doesNotUnderstand: #,
+[ | el edge food el2 edge2 response |
+response := ZnClient new
+	url: 'http://localhost:8080/toTheEnd';
+	enforceHttpSuccess: true;
+	accept: ZnMimeType applicationJson;
+	timeout: 1000;
+	contentReader: [ :reader | NeoJSONReader fromString: reader contents ];
+	get.
+size := v elements size.
+size ~= 0
+	ifTrue: [ 1 to: size - 1 do: [ :i | (v elements at: size - i) remove ].
+		v elements atRandom remove ].
+Transcript clear.
+Transcript show: 'Epoche: '.
+Transcript show: (response at: #currentEpoch asString) , '/'.
+Transcript
+	show: (response at: #finalEpoch);
+	cr.
+(response at: #foodSources)
+	do: [ :foodSource | 
+		food := (RTEllipse new
+			size: 30;
+			color: (Color green alpha: 0.4)) element.
+		food @ RTDraggable.
+		food translateTo: 1 atRandom @ 1 atRandom.
+		v add: food.
+		Transcript
+			show: (foodSource at: #Occupied);
+			cr.
+		(foodSource at: #Occupied) = 0
+			ifTrue: [ stepping addNode: food ].
+		(foodSource at: #Occupied) = 1
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el @ RTDraggable.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				edge := RTLine edgeFrom: el to: food.
+				v add: edge.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge ].
+		(foodSource at: #Occupied) = 2
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el @ RTDraggable.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 2) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el2 := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el2 @ RTDraggable.
+				el2 translateTo: 5 atRandom @ 5 atRandom.
+				v add: el2.
+				edge := RTLine edgeFrom: el to: food.
+				edge2 := RTLine edgeFrom: el2 to: food.
+				v add: edge.
+				v add: edge2.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge;
+					addNode: el2;
+					addEdge: edge2 ] ].
+Transcript show: v elements size.
+v signalUpdate ] in UndefinedObject>>DoIt in Block: [ | el edge food el2 edge2 response |...
+[ :arg5 | arg2 value ] in TRCanvas>>addMenu:callback: in Block: [ :arg5 | arg2 value ]
+BlockClosure>>cull:
+BlockClosure>>cull:cull:
+[ action cull: arg1 cull: announcer ] in AnnouncementSubscription>>deliver: in Block: [ action cull: arg1 cull: announcer ]
+BlockClosure>>on:do:
+[ Processor terminateActive ] in [ :arg3 | 
+| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+tmp2 := thisContext.
+tmp6 := tmp2 home.
+[ tmp2 sender == tmp6 ]
+	whileFalse: [ tmp2 := tmp2 sender.
+		tmp2 ifNil: [ ^ arg2 cull: arg3 ] ].
+tmp5 := [ Processor terminateActive ] asContext.
+tmp2 privSender: tmp5.
+tmp4 := [ arg2 cull: arg3 ] asContext.
+tmp4 privSender: thisContext sender.
+(Process forContext: tmp4 priority: Processor activePriority) resume.
+thisContext privSender: tmp6 ] in BlockClosure>>on:fork: in Block: [ Processor terminateActive ]
+[0m[31mError: only integers should be used as indices
+[0mArray(Object)>>error:
+Array(Object)>>errorNonIntegerIndex
+Array(Object)>>at:
+UndefinedObject>>DoIt
+OpalCompiler>>evaluate
+RubSmalltalkEditor>>evaluate:andDo:
+RubSmalltalkEditor>>highlightEvaluateAndDo:
+[ textMorph textArea editor highlightEvaluateAndDo: arg1 action.
+textMorph shoutStyler style: textMorph text ] in [ textMorph textArea
+	handleEdit: [ textMorph textArea editor highlightEvaluateAndDo: arg1 action.
+		textMorph shoutStyler style: textMorph text ] ] in GLMMorphicPharoScriptRenderer(GLMMorphicPharoCodeRenderer)>>actOnHighlightAndEvaluate: in Block: [ textMorph textArea editor highlightEvaluateAndDo...etc...
+RubEditingArea(RubAbstractTextArea)>>handleEdit:
+[ textMorph textArea
+	handleEdit: [ textMorph textArea editor highlightEvaluateAndDo: arg1 action.
+		textMorph shoutStyler style: textMorph text ] ] in GLMMorphicPharoScriptRenderer(GLMMorphicPharoCodeRenderer)>>actOnHighlightAndEvaluate: in Block: [ textMorph textArea...
+WorldState>>runStepMethodsIn:
+WorldMorph>>runStepMethods
+WorldState>>doOneCycleNowFor:
+WorldState>>doOneCycleFor:
+WorldState>>doOneSubCycleFor:
+WorldMorph>>doOneSubCycle
+MenuMorph>>invokeModalAt:in:allowKeyboard:
+MenuMorph>>invokeModal:
+MenuMorph>>invokeModal
+RubEditingArea(RubAbstractTextArea)>>yellowButtonActivity:
+RubEditingArea(RubAbstractTextArea)>>mouseDown:
+RubEditingArea(Morph)>>handleMouseDown:
+MouseButtonEvent>>sentTo:
+RubEditingArea(Morph)>>handleEvent:
+MorphicEventDispatcher>>dispatchMouseDown:with:
+MorphicEventDispatcher>>handleMouseDown:
+MouseButtonEvent>>sentTo:
+[ ^ arg1 sentTo: self ] in MorphicEventDispatcher>>dispatchEvent:with: in Block: [ ^ arg1 sentTo: self ]
+BlockClosure>>ensure:
+MorphicEventDispatcher>>dispatchEvent:with:
+[0m[31mError: only integers should be used as indices
+[0mArray(Object)>>error:
+Array(Object)>>errorNonIntegerIndex
+Array(Object)>>at:
+UndefinedObject>>DoIt
+OpalCompiler>>evaluate
+RubSmalltalkEditor>>evaluate:andDo:
+RubSmalltalkEditor>>highlightEvaluateAndDo:
+[ textMorph textArea editor highlightEvaluateAndDo: arg1 action.
+textMorph shoutStyler style: textMorph text ] in [ textMorph textArea
+	handleEdit: [ textMorph textArea editor highlightEvaluateAndDo: arg1 action.
+		textMorph shoutStyler style: textMorph text ] ] in GLMMorphicPharoScriptRenderer(GLMMorphicPharoCodeRenderer)>>actOnHighlightAndEvaluate: in Block: [ textMorph textArea editor highlightEvaluateAndDo...etc...
+RubEditingArea(RubAbstractTextArea)>>handleEdit:
+[ textMorph textArea
+	handleEdit: [ textMorph textArea editor highlightEvaluateAndDo: arg1 action.
+		textMorph shoutStyler style: textMorph text ] ] in GLMMorphicPharoScriptRenderer(GLMMorphicPharoCodeRenderer)>>actOnHighlightAndEvaluate: in Block: [ textMorph textArea...
+WorldState>>runStepMethodsIn:
+WorldMorph>>runStepMethods
+WorldState>>doOneCycleNowFor:
+WorldState>>doOneCycleFor:
+WorldState>>doOneSubCycleFor:
+WorldMorph>>doOneSubCycle
+MenuMorph>>invokeModalAt:in:allowKeyboard:
+MenuMorph>>invokeModal:
+MenuMorph>>invokeModal
+RubEditingArea(RubAbstractTextArea)>>yellowButtonActivity:
+RubEditingArea(RubAbstractTextArea)>>mouseDown:
+RubEditingArea(Morph)>>handleMouseDown:
+MouseButtonEvent>>sentTo:
+RubEditingArea(Morph)>>handleEvent:
+MorphicEventDispatcher>>dispatchMouseDown:with:
+MorphicEventDispatcher>>handleMouseDown:
+MouseButtonEvent>>sentTo:
+[ ^ arg1 sentTo: self ] in MorphicEventDispatcher>>dispatchEvent:with: in Block: [ ^ arg1 sentTo: self ]
+BlockClosure>>ensure:
+MorphicEventDispatcher>>dispatchEvent:with:
+[0m[31mError: only integers should be used as indices
+[0mArray(Object)>>error:
+Array(Object)>>errorNonIntegerIndex
+Array(Object)>>at:
+UndefinedObject>>DoIt
+OpalCompiler>>evaluate
+RubSmalltalkEditor>>evaluate:andDo:
+RubSmalltalkEditor>>highlightEvaluateAndDo:
+[ textMorph textArea editor highlightEvaluateAndDo: arg1 action.
+textMorph shoutStyler style: textMorph text ] in [ textMorph textArea
+	handleEdit: [ textMorph textArea editor highlightEvaluateAndDo: arg1 action.
+		textMorph shoutStyler style: textMorph text ] ] in GLMMorphicPharoScriptRenderer(GLMMorphicPharoCodeRenderer)>>actOnHighlightAndEvaluate: in Block: [ textMorph textArea editor highlightEvaluateAndDo...etc...
+RubEditingArea(RubAbstractTextArea)>>handleEdit:
+[ textMorph textArea
+	handleEdit: [ textMorph textArea editor highlightEvaluateAndDo: arg1 action.
+		textMorph shoutStyler style: textMorph text ] ] in GLMMorphicPharoScriptRenderer(GLMMorphicPharoCodeRenderer)>>actOnHighlightAndEvaluate: in Block: [ textMorph textArea...
+WorldState>>runStepMethodsIn:
+WorldMorph>>runStepMethods
+WorldState>>doOneCycleNowFor:
+WorldState>>doOneCycleFor:
+WorldMorph>>doOneCycle
+WorldMorph class>>doOneCycle
+[ [ WorldMorph doOneCycle.
+Processor yield.
+false ] whileFalse: [  ] ] in MorphicUIManager>>spawnNewProcess in Block: [ [ WorldMorph doOneCycle....
+[ self value.
+Processor terminateActive ] in BlockClosure>>newProcess in Block: [ self value....
+[0m[31mInstance of SmallInteger did not understand #,
+[0mSmallInteger(Object)>>doesNotUnderstand: #,
+[ | el edge food el2 edge2 response |
+response := ZnClient new
+	url: 'http://localhost:8080/toTheEnd';
+	enforceHttpSuccess: true;
+	accept: ZnMimeType applicationJson;
+	timeout: 1000;
+	contentReader: [ :reader | NeoJSONReader fromString: reader contents ];
+	get.
+size := v elements size.
+size ~= 0
+	ifTrue: [ 1 to: size - 1 do: [ :i | (v elements at: size - i) remove ].
+		v elements atRandom remove ].
+Transcript clear.
+Transcript show: 'Epoche: '.
+Transcript show: (response at: #currentEpoch) , '/'.
+Transcript
+	show: (response at: #finalEpoch);
+	cr.
+(response at: #foodSources)
+	do: [ :foodSource | 
+		food := (RTEllipse new
+			size: 30;
+			color: (Color green alpha: 0.4)) element.
+		food @ RTDraggable.
+		food translateTo: 1 atRandom @ 1 atRandom.
+		v add: food.
+		Transcript
+			show: (foodSource at: #Occupied);
+			cr.
+		(foodSource at: #Occupied) = 0
+			ifTrue: [ stepping addNode: food ].
+		(foodSource at: #Occupied) = 1
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el @ RTDraggable.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				edge := RTLine edgeFrom: el to: food.
+				v add: edge.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge ].
+		(foodSource at: #Occupied) = 2
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el @ RTDraggable.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 2) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el2 := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el2 @ RTDraggable.
+				el2 translateTo: 5 atRandom @ 5 atRandom.
+				v add: el2.
+				edge := RTLine edgeFrom: el to: food.
+				edge2 := RTLine edgeFrom: el2 to: food.
+				v add: edge.
+				v add: edge2.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge;
+					addNode: el2;
+					addEdge: edge2 ] ].
+Transcript show: v elements size.
+v signalUpdate ] in UndefinedObject>>DoIt in Block: [ | el edge food el2 edge2 response |...
+[ :arg5 | arg2 value ] in TRCanvas>>addMenu:callback: in Block: [ :arg5 | arg2 value ]
+BlockClosure>>cull:
+BlockClosure>>cull:cull:
+[ action cull: arg1 cull: announcer ] in AnnouncementSubscription>>deliver: in Block: [ action cull: arg1 cull: announcer ]
+BlockClosure>>on:do:
+[ Processor terminateActive ] in [ :arg3 | 
+| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+tmp2 := thisContext.
+tmp6 := tmp2 home.
+[ tmp2 sender == tmp6 ]
+	whileFalse: [ tmp2 := tmp2 sender.
+		tmp2 ifNil: [ ^ arg2 cull: arg3 ] ].
+tmp5 := [ Processor terminateActive ] asContext.
+tmp2 privSender: tmp5.
+tmp4 := [ arg2 cull: arg3 ] asContext.
+tmp4 privSender: thisContext sender.
+(Process forContext: tmp4 priority: Processor activePriority) resume.
+thisContext privSender: tmp6 ] in BlockClosure>>on:fork: in Block: [ Processor terminateActive ]
+[0m[31mInstance of SmallInteger did not understand #,
+[0mSmallInteger(Object)>>doesNotUnderstand: #,
+[ | el edge food el2 edge2 response |
+response := ZnClient new
+	url: 'http://localhost:8080/toTheEnd';
+	enforceHttpSuccess: true;
+	accept: ZnMimeType applicationJson;
+	timeout: 1000;
+	contentReader: [ :reader | NeoJSONReader fromString: reader contents ];
+	get.
+size := v elements size.
+size ~= 0
+	ifTrue: [ 1 to: size - 1 do: [ :i | (v elements at: size - i) remove ].
+		v elements atRandom remove ].
+Transcript clear.
+Transcript show: 'Epoche: '.
+Transcript show: (response at: #currentEpoch) , 'asdasds'.
+Transcript
+	show: (response at: #finalEpoch);
+	cr.
+(response at: #foodSources)
+	do: [ :foodSource | 
+		food := (RTEllipse new
+			size: 30;
+			color: (Color green alpha: 0.4)) element.
+		food @ RTDraggable.
+		food translateTo: 1 atRandom @ 1 atRandom.
+		v add: food.
+		Transcript
+			show: (foodSource at: #Occupied);
+			cr.
+		(foodSource at: #Occupied) = 0
+			ifTrue: [ stepping addNode: food ].
+		(foodSource at: #Occupied) = 1
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el @ RTDraggable.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				edge := RTLine edgeFrom: el to: food.
+				v add: edge.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge ].
+		(foodSource at: #Occupied) = 2
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el @ RTDraggable.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 2) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el2 := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el2 @ RTDraggable.
+				el2 translateTo: 5 atRandom @ 5 atRandom.
+				v add: el2.
+				edge := RTLine edgeFrom: el to: food.
+				edge2 := RTLine edgeFrom: el2 to: food.
+				v add: edge.
+				v add: edge2.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge;
+					addNode: el2;
+					addEdge: edge2 ] ].
+Transcript show: v elements size.
+v signalUpdate ] in UndefinedObject>>DoIt in Block: [ | el edge food el2 edge2 response |...
+[ :arg5 | arg2 value ] in TRCanvas>>addMenu:callback: in Block: [ :arg5 | arg2 value ]
+BlockClosure>>cull:
+BlockClosure>>cull:cull:
+[ action cull: arg1 cull: announcer ] in AnnouncementSubscription>>deliver: in Block: [ action cull: arg1 cull: announcer ]
+BlockClosure>>on:do:
+[ Processor terminateActive ] in [ :arg3 | 
+| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+tmp2 := thisContext.
+tmp6 := tmp2 home.
+[ tmp2 sender == tmp6 ]
+	whileFalse: [ tmp2 := tmp2 sender.
+		tmp2 ifNil: [ ^ arg2 cull: arg3 ] ].
+tmp5 := [ Processor terminateActive ] asContext.
+tmp2 privSender: tmp5.
+tmp4 := [ arg2 cull: arg3 ] asContext.
+tmp4 privSender: thisContext sender.
+(Process forContext: tmp4 priority: Processor activePriority) resume.
+thisContext privSender: tmp6 ] in BlockClosure>>on:fork: in Block: [ Processor terminateActive ]
+[0m[31mInstance of SmallInteger did not understand #,
+[0mSmallInteger(Object)>>doesNotUnderstand: #,
+[ | el edge food el2 edge2 response |
+response := ZnClient new
+	url: 'http://localhost:8080/toTheEnd';
+	enforceHttpSuccess: true;
+	accept: ZnMimeType applicationJson;
+	timeout: 1000;
+	contentReader: [ :reader | NeoJSONReader fromString: reader contents ];
+	get.
+size := v elements size.
+size ~= 0
+	ifTrue: [ 1 to: size - 1 do: [ :i | (v elements at: size - i) remove ].
+		v elements atRandom remove ].
+Transcript clear.
+Transcript show: 'Epoche: '.
+Transcript show: (response at: #currentEpoch) , 'asdasds'.
+Transcript
+	show: (response at: #finalEpoch);
+	cr.
+(response at: #foodSources)
+	do: [ :foodSource | 
+		food := (RTEllipse new
+			size: 30;
+			color: (Color green alpha: 0.4)) element.
+		food @ RTDraggable.
+		food translateTo: 1 atRandom @ 1 atRandom.
+		v add: food.
+		Transcript
+			show: (foodSource at: #Occupied);
+			cr.
+		(foodSource at: #Occupied) = 0
+			ifTrue: [ stepping addNode: food ].
+		(foodSource at: #Occupied) = 1
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el @ RTDraggable.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				edge := RTLine edgeFrom: el to: food.
+				v add: edge.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge ].
+		(foodSource at: #Occupied) = 2
+			ifTrue: [ c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 1) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el @ RTDraggable.
+				el translateTo: 1 atRandom @ 1 atRandom.
+				v add: el.
+				c := Color blue.
+				(((foodSource at: #OccupiedBy) at: 2) at: #typeOfIndividual) = 1
+					ifTrue: [ c := Color red ].
+				el2 := (RTEllipse new
+					size: 30;
+					color: (c alpha: 0.4)) element.
+				el2 @ RTDraggable.
+				el2 translateTo: 5 atRandom @ 5 atRandom.
+				v add: el2.
+				edge := RTLine edgeFrom: el to: food.
+				edge2 := RTLine edgeFrom: el2 to: food.
+				v add: edge.
+				v add: edge2.
+				stepping
+					addNode: food;
+					addNode: el;
+					addEdge: edge;
+					addNode: el2;
+					addEdge: edge2 ] ].
+Transcript show: v elements size.
+v signalUpdate ] in UndefinedObject>>DoIt in Block: [ | el edge food el2 edge2 response |...
+[ :arg5 | arg2 value ] in TRCanvas>>addMenu:callback: in Block: [ :arg5 | arg2 value ]
+BlockClosure>>cull:
+BlockClosure>>cull:cull:
+[ action cull: arg1 cull: announcer ] in AnnouncementSubscription>>deliver: in Block: [ action cull: arg1 cull: announcer ]
+BlockClosure>>on:do:
+[ Processor terminateActive ] in [ :arg3 | 
+| tmp1 tmp2 tmp3 tmp4 tmp5 tmp6 |
+tmp2 := thisContext.
+tmp6 := tmp2 home.
+[ tmp2 sender == tmp6 ]
+	whileFalse: [ tmp2 := tmp2 sender.
+		tmp2 ifNil: [ ^ arg2 cull: arg3 ] ].
+tmp5 := [ Processor terminateActive ] asContext.
+tmp2 privSender: tmp5.
+tmp4 := [ arg2 cull: arg3 ] asContext.
+tmp4 privSender: thisContext sender.
+(Process forContext: tmp4 priority: Processor activePriority) resume.
+thisContext privSender: tmp6 ] in BlockClosure>>on:fork: in Block: [ Processor terminateActive ]
+[0m

@@ -1,0 +1,1 @@
+client := Dictionary newForm: { 			            (#name -> 'James').			            (#surname -> 'Bond') }
