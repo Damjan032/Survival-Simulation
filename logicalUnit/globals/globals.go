@@ -1,6 +1,8 @@
 package globals
 
-import "../models"
+import (
+	"../models"
+)
 
 var Population *models.Population
 var FoodSources []*models.FoodSource
@@ -12,5 +14,10 @@ var NumberOfFoodSources = 100
 var BoostToSurvive = 10
 var MutationPercent = 10
 var MutationToGoodBoost = 10
+var ErrorNormal = 0
+var ErrorParallel = 0
+var ParallelNightInterval = 16
+var ParallelDayInterval = 16
 var Lvls = []string{"easy", "normal", "hard"}
+var LogFilePath = "tmp/currentStart.log"
 var Lvl = "easy"

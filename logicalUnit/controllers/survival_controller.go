@@ -123,5 +123,8 @@ func sendResult(c *gin.Context) {
 	foodSourcesDto.NumberOfGood = globals.Population.NumberOfGood
 	foodSourcesDto.NumberOfBad = globals.Population.NumberOfBad
 	btResult, _ := json.Marshal(foodSourcesDto)
+	if globals.CurrentEpoch == 0 {
+		services.WriteInMongoDB(foodSourcesDto)
+	}
 	c.Data(http.StatusOK, "application/json", btResult)
 }

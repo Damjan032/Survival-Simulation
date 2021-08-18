@@ -5,6 +5,7 @@ import (
 	"../models"
 	"math/rand"
 	"sort"
+	"sync"
 )
 
 const MaxHP = 100
@@ -13,6 +14,45 @@ func Night(population *models.Population) {
 	nightEating(population.Members)
 	doOrDie(population)
 
+}
+
+func NightParallel(population *models.Population) {
+	if len(globals.FoodSources) > 2500 {
+		var wg sync.WaitGroup
+		nightEatingParallel(population.Members, &wg)
+		wg.Wait()
+	} else {
+		nightEating(population.Members)
+	}
+
+	doOrDie(population)
+
+}
+
+func nightEatingParallel(population []*models.Individual, wg *sync.WaitGroup) {
+	//fmt.Println(len(foodSources))
+	var timesLoop = int(len(population) / globals.ParallelNightInterval)
+	//fmt.Println("FOOD SOURCES ", timesLoop)
+	for i := 0; i < timesLoop; i++ {
+		wg.Add(globals.ParallelNightInterval)
+		for j := 0; j < globals.ParallelNightInterval; j++ {
+			//fmt.Println(i*150+j)
+			go nightTimeLogicParallel(population[i*globals.ParallelNightInterval+j], wg)
+		}
+		wg.Wait()
+	}
+	var restPopulation = len(population) % globals.ParallelNightInterval
+	wg.Add(restPopulation)
+	for i := timesLoop * globals.ParallelNightInterval; i < len(population); i++ {
+		//fmt.Println(i)
+		go nightTimeLogicParallel(population[i], wg)
+	}
+	wg.Wait()
+
+	/*for _, pleb := range population {
+		pleb.NightRes = nightTimeLogic(pleb)
+	}
+	defer wg.Done()*/
 }
 
 func nightEating(population []*models.Individual) {
@@ -70,6 +110,35 @@ func reproduceMember(population *models.Population, whiteList []int) []*models.I
 
 	}
 	return newMembers
+}
+
+func nightTimeLogicParallel(individual *models.Individual, wg *sync.WaitGroup) models.ProductOfTheNight {
+	if individual.Health <= 0 {
+		individual.NightRes = models.DIED
+		defer wg.Done()
+		return models.DIED
+	}
+	if individual.Health < MaxHP {
+		if calculateIsHappened(MaxHP - individual.Health + globals.BoostToSurvive) {
+			individual.NightRes = models.DIED
+			defer wg.Done()
+			return models.DIED
+		}
+	} else if individual.Health >= MaxHP {
+		if calculateIsHappened(individual.Health - MaxHP + globals.BoostToSurvive) {
+			//fmt.Println("UMNOZIO SE")
+
+			individual.NightRes = models.REPRODUCED
+			defer wg.Done()
+			return models.REPRODUCED
+		}
+
+	}
+
+	individual.NightRes = models.NEUTRAL
+	defer wg.Done()
+	return models.NEUTRAL
+
 }
 
 func nightTimeLogic(individual *models.Individual) models.ProductOfTheNight {
