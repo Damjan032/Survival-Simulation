@@ -16,5 +16,8 @@ func initRouter() {
 	r.POST("/initData", controllers.SetInitData)
 	r.GET("/nextEpoch", controllers.NextEpoch)
 	r.GET("/currentData", controllers.CurrentData)
+	r.GET("/mainData", controllers.GetMainData)
+	r.GET("/fullData", controllers.GetFullData)
+	r.GET("/fullData/:id", controllers.GetFullDataById)
 	r.Run()
 }

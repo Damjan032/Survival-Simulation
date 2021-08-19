@@ -72,6 +72,8 @@ func NextEpoch(c *gin.Context) {
 		fmt.Println("-------------------------------------------------------------------------")
 		services.Day(globals.Population.Members, globals.FoodSources)
 		globals.CurrentEpoch += 1
+
+		services.WriteStartInLog()
 		sendResult(c)
 		return
 	}
@@ -85,11 +87,12 @@ func NextEpoch(c *gin.Context) {
 	services.Night(globals.Population)
 	services.Day(globals.Population.Members, globals.FoodSources)
 	//printPlebs(population.members)
-
 	fmt.Println("BAD", globals.Population.NumberOfBad, " GOOD", globals.Population.NumberOfGood)
 	fmt.Println("SUM ", globals.Population.NumberOfBad+globals.Population.NumberOfGood)
 	fmt.Println("-------------------------------------------------------------------------")
 	globals.CurrentEpoch += 1
+
+	services.WriteCurrentEpochInLog()
 	sendResult(c)
 
 }
@@ -100,11 +103,14 @@ func ToTheEnd(c *gin.Context) {
 		sendResult(c)
 		return
 	}
-	for i := globals.CurrentEpoch; i <= globals.FinalEpoch; i++ {
+	for i := globals.CurrentEpoch + 1; i <= globals.FinalEpoch; i++ {
 		fmt.Println("I: ", i)
+		globals.CurrentEpoch = i
+
 		services.ClearFoodSources(globals.FoodSources)
 		services.Night(globals.Population)
 		services.Day(globals.Population.Members, globals.FoodSources)
+		services.WriteCurrentEpochInLog()
 	}
 	fmt.Println("BAD", globals.Population.NumberOfBad, " GOOD", globals.Population.NumberOfGood)
 	globals.CurrentEpoch = globals.FinalEpoch
@@ -123,8 +129,8 @@ func sendResult(c *gin.Context) {
 	foodSourcesDto.NumberOfGood = globals.Population.NumberOfGood
 	foodSourcesDto.NumberOfBad = globals.Population.NumberOfBad
 	btResult, _ := json.Marshal(foodSourcesDto)
-	if globals.CurrentEpoch == 0 {
+	/*if globals.CurrentEpoch == 0 {
 		services.WriteInMongoDB(foodSourcesDto)
-	}
+	}*/
 	c.Data(http.StatusOK, "application/json", btResult)
 }

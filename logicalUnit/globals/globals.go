@@ -2,6 +2,7 @@ package globals
 
 import (
 	"../models"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 var Population *models.Population
@@ -19,5 +20,5 @@ var ErrorParallel = 0
 var ParallelNightInterval = 16
 var ParallelDayInterval = 16
 var Lvls = []string{"easy", "normal", "hard"}
-var LogFilePath = "tmp/currentStart.log"
+var MongoDBConnection *mongo.Database
 var Lvl = "easy"

@@ -1,16 +1,23 @@
 package main
 
 import (
-	"context"
+	"./services"
 	"fmt"
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
-	"log"
-	"time"
 )
 
-func main() {
+func main6() {
+	/*	document := services.ReadLogs()
+		services.WriteInMongoDB(document)*/
+	/*foodSourcesDto := new(dto.FoodSourcesDto)
+	foodSourcesDto.FoodSources = globals.FoodSources
+	foodSourcesDto.CurrentEpoch = globals.CurrentEpoch
+	foodSourcesDto.FinalEpoch = globals.FinalEpoch
+	btResult, _ := json.Marshal(foodSourcesDto)
+	fmt.Println(string(btResult))
+	foodSourcesDto2 := new(dto.FoodSourcesDto)
+	json.Unmarshal(btResult, foodSourcesDto2)
+	btResult2, _ := json.Marshal(foodSourcesDto2)
+	fmt.Println(string(btResult2))
 
 	client, err := mongo.NewClient(options.Client().
 		ApplyURI("mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false"))
@@ -22,10 +29,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("connected to mongodb")
+	fmt.Println("connected to mongodb")*/
 
-	quickstartDatabase := client.Database("quickstart")
-	podcastsCollection := quickstartDatabase.Collection("podcasts")
 	//	episodesCollection := quickstartDatabase.Collection("episodes2")
 
 	/*podcastResult, err := podcastsCollection.InsertOne(ctx, bson.D{
@@ -52,15 +57,10 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Printf("Inserted %v documents into episode collection!\n", len(episodeResult.InsertedIDs))*/
-	cursor, err := podcastsCollection.Find(ctx, bson.M{})
-	if err != nil {
-		log.Fatal(err)
-	}
-	var podcasts []bson.M
-	if err = cursor.All(ctx, &podcasts); err != nil {
-		log.Fatal(err)
-	}
-	for i := range podcasts {
-		fmt.Println(podcasts[i]["currentepoch"])
-	}
+	var mainParamsList = services.ReadAllMainParams()
+	var fullDataList = services.ReadFullDataDocument()
+	fmt.Println(len(mainParamsList))
+	fmt.Println(len(fullDataList))
+	fmt.Println(services.FindAllDataById("611e6bd6bc14806d31da0ac8"))
+	//initRouter()
 }
