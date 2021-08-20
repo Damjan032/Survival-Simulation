@@ -56,7 +56,7 @@ func readEpoch(line string, documentDto *dto.MongoDocumentDto) {
 	numberOfGoodsString := strings.Split(regexp.MustCompile(`NumberOfGoods: .[0-9]*`).FindString(line), ":")[1]
 	numberOfGoods, _ := strconv.Atoi(strings.Trim(numberOfGoodsString, "\t \n"))
 
-	numberOfBadsString := strings.Split(regexp.MustCompile(`NumberOfGoods: .[0-9]*`).FindString(line), ":")[1]
+	numberOfBadsString := strings.Split(regexp.MustCompile(`NumberOfBads: .[0-9]*`).FindString(line), ":")[1]
 	numberOfBads, _ := strconv.Atoi(strings.Trim(numberOfBadsString, "\t \n"))
 
 	currentEpochString := strings.Split(regexp.MustCompile(`CurrentEpoch: .[0-9]*`).FindString(line), ":")[1]
@@ -182,6 +182,28 @@ func ReadFullDataDocument() []dto.MongoDocumentDto {
 		fullDataDocument = append(fullDataDocument, elem)
 	}
 	return fullDataDocument
+}
+
+func ReadFullFirstData() dto.MongoDocumentDto {
+	connectDB()
+	ctx, cancelFun := context.WithTimeout(context.Background(), 10*time.Second)
+
+	fullDataCollection := globals.MongoDBConnection.Collection(_const.FullDataCollection)
+	fullDataCursor, fullDataCollectionErr := fullDataCollection.Find(ctx, bson.M{})
+	go func() {
+		if fullDataCollectionErr != nil {
+			cancelFun()
+			log.Fatal("fullDataCollectionErr")
+		}
+	}()
+	fullDataCursor.Next(context.TODO())
+	var elem dto.MongoDocumentDto
+	err := fullDataCursor.Decode(&elem)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return elem
+
 }
 
 func FindAllDataById(id string) dto.MongoDocumentDto {

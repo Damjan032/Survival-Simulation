@@ -6,8 +6,8 @@ import (
 )
 
 func main6() {
-	/*	document := services.ReadLogs()
-		services.WriteInMongoDB(document)*/
+	document := services.ReadLogs()
+		services.WriteInMongoDB(document)
 	/*foodSourcesDto := new(dto.FoodSourcesDto)
 	foodSourcesDto.FoodSources = globals.FoodSources
 	foodSourcesDto.CurrentEpoch = globals.CurrentEpoch
