@@ -4,6 +4,7 @@ import axios from "axios";
 const SimulationDataModule = {
     namespaced: true,
     state: {
+        tableDialog: false,
         currentId: null,
         fullData: null,
         mainDates: []
@@ -15,8 +16,14 @@ const SimulationDataModule = {
         setMainDates(state, mainDates) {
             Vue.set(state, "mainDates", mainDates);
         },
+        setTableShow(state, tableDialog) {
+            Vue.set(state, "tableDialog", tableDialog);
+        },
     },
     actions: {
+        async setTableShow({ commit }, tableDialog) {
+            commit("setTableShow", tableDialog);
+        },
         async getFullDataById({ commit }, id) {
             try {
                 axios

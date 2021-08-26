@@ -8,7 +8,8 @@ import store from "./store";
 //import './assets/js/main'
 //import VueToast from "vue-toast-notification";
 //import "vue-toast-notification/dist/theme-sugar.css";
-
+import Fragment from 'vue-fragment';
+Vue.use(Fragment.Plugin);
 
 Vue.config.productionTip = false
 //Vue.use(VueToast);

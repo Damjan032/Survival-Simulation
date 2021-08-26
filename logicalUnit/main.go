@@ -1,12 +1,12 @@
 package main
 
+import "./services"
+
 func main() {
-	//services.SetupLog()
+
+	services.SetupLog()
 	/*var iteration = 100
-	f, err := os.OpenFile("tmp/orders.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
-	if err != nil {
-		log.Fatalf("error opening file: %v", err)
-	}
+
 	defer f.Close()
 	wrt := io.MultiWriter(os.Stdout, f)
 	log.SetOutput(wrt)

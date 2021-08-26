@@ -1,14 +1,24 @@
 <template>
   <v-app>
+<!--    <v-navigation-drawer-->
+<!--        dark-->
+<!--        class="primary elevation-5"-->
+<!--        color="teal lighten-3"-->
+<!--        :mini-variant="mini"-->
+<!--        permanent-->
+<!--        app-->
+<!--    >-->
+<!--    </v-navigation-drawer>-->
     <NavBar/>
 
     <v-content class="content">
-      <v-container fluid  class="pa-0 ma-0">
-        <div style="width: 100%">
-          <Chart/>
-          <Chart2/>
-          <v-card>
-          </v-card>
+      <v-container fluid style="width: 90%" class="justify-center">
+        <div >
+          <MainInfo/>
+          <v-divider></v-divider>
+          <ChartPercentOfPopulation/>
+          <v-divider></v-divider>
+          <ChartNumberOfPopulation/>
 
         </div>
 
@@ -20,14 +30,19 @@
 
 import {mapActions, mapState} from "vuex";
 import NavBar from "../components/NavBar";
-import Chart from "../components/Chart";
-import Chart2 from "../components/ChartNumberOfPopulation";
+import ChartPercentOfPopulation from "../components/ChartPercentOfPopulation";
+import ChartNumberOfPopulation from "../components/ChartNumberOfPopulation";
+import MainInfo from "../components/MainInfo";
 
 export default {
   name: "Main",
-  components: {Chart2, Chart, NavBar},
+  components: {MainInfo, ChartNumberOfPopulation, ChartPercentOfPopulation, NavBar},
   data: () => ({
     miniDrawer: true,
+    mini: {
+      type: Boolean,
+      default: true
+    },
   }),
   mounted() {
     this.getFullFirstData();
@@ -37,11 +52,10 @@ export default {
     ...mapState('simulations', ['fullData']),
 
   },
+
   methods: {
-    ...mapActions('simulations', ['getFullFirstData', 'getMainDates']),
-    printData() {
-      console.log(this.fullData)
-    },
+    ...mapActions('simulations', ['getFullFirstData', 'getMainDates', "getFullDataById"]),
+
   }
 }
 </script>

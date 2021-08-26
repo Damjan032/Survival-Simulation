@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func main6() {
+func main16() {
 	document := services.ReadLogs()
 		services.WriteInMongoDB(document)
 	/*foodSourcesDto := new(dto.FoodSourcesDto)

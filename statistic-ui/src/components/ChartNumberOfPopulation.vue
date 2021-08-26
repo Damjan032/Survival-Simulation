@@ -1,6 +1,6 @@
 <template>
   <div class="" id="vue-container2" >
-    <div class="" id="chartContainer2" style="height: 360px; width: 100%;"></div>
+    <div class="" id="chartContainer2" style="height: 360px;"></div>
   </div>
 
 </template>
@@ -40,6 +40,11 @@ export default {
   computed: {
     ...mapState('simulations', ['fullData', 'mainDates']),
 
+  },
+  watch: {
+    'fullData': function () {
+      this.drawGraph()
+    }
   },
   methods: {
     drawGraph() {
